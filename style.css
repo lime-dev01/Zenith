@@ -1,0 +1,346 @@
+/* ============================================
+   SUB — Design System (Couche 1)
+   ============================================ */
+
+:root {
+  --bg: #F2F2F2;       /* Blanc cassé */
+  --text: #0A0A0A;     /* Noir profond */
+  --red: #FF3300;      /* Rouge signalétique */
+  --grey: #888888;
+
+  --font-title: 'Archivo Black', sans-serif;
+  --font-text: 'Space Grotesk', sans-serif;
+  
+  --gutter: clamp(1rem, 4vw, 4rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-text);
+  overflow-x: hidden; /* Empêche le scroll horizontal de casser la page */
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+
+/* ============================================
+   PRELOADER
+   ============================================ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--text);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preloader__text {
+  font-family: var(--font-title);
+  font-size: 20vw;
+  color: var(--red);
+  line-height: 1;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 1.5rem var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  mix-blend-mode: difference;
+  color: var(--bg); /* L'inverse de la couleur de fond */
+}
+
+.nav__logo {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.nav__links {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   HERO (Typographie Brutale)
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  position: relative;
+}
+
+.hero__title {
+  font-family: var(--font-title);
+  font-size: clamp(4rem, 15vw, 18rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+}
+
+/* Ligne avec juste le contour */
+.hero__title .line--outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text);
+}
+
+/* Ligne rouge */
+.hero__title .line--red {
+  color: var(--red);
+}
+
+.hero__meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-top: 1px solid var(--text);
+  padding-top: 1rem;
+}
+
+/* ============================================
+   MANIFESTE
+   ============================================ */
+.manifeste {
+  padding: 10rem var(--gutter);
+  background: var(--text);
+  color: var(--bg);
+}
+
+.manifeste__grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.manifeste__label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--grey);
+}
+
+.manifeste__text {
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+.highlight {
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* ============================================
+   COLLECTION (Préparation du scroll horizontal)
+   ============================================ */
+.collection {
+  padding: 8rem 0; /* Pas de padding sur les côtés pour le track */
+  overflow: hidden;
+}
+
+.collection__header {
+  padding: 0 var(--gutter);
+  margin-bottom: 4rem;
+}
+
+.collection__title {
+  font-family: var(--font-title);
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--text);
+  padding-bottom: 1rem;
+}
+
+/* Le track qui contiendra les items */
+.collection__track {
+  display: flex;
+  gap: 2rem;
+  padding: 0 var(--gutter);
+  /* On force une largeur pour qu'il déborde de l'écran */
+  width: max-content; 
+}
+
+.item {
+  width: clamp(300px, 40vw, 500px);
+  flex-shrink: 0;
+}
+
+.item__img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.item__placeholder {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.2);
+  transform: rotate(-90deg);
+}
+
+.item__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--text);
+  padding-top: 0.5rem;
+}
+
+.item__info h3 {
+  font-family: var(--font-text);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.item__info p {
+  font-family: var(--font-text);
+  font-size: 1rem;
+  color: var(--grey);
+}
+
+/* ============================================
+   DROP (Ticket de métro)
+   ============================================ */
+.drop {
+  padding: 10rem var(--gutter);
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+}
+
+.drop__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.drop__label {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+/* Le ticket */
+.ticket {
+  background: #FFF;
+  border: 2px dashed var(--text);
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  font-family: 'Courier New', Courier, monospace;
+  transform: rotate(-2deg); /* Effet scotché */
+  box-shadow: 10px 10px 0 var(--text); /* Ombre dure */
+  position: relative;
+}
+
+.ticket__top, .ticket__bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.ticket__timer {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--red);
+  background: #F0F0F0;
+  padding: 1rem;
+  border: 1px solid var(--text);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding: 4rem var(--gutter);
+  background: var(--text);
+  color: var(--bg);
+}
+
+.footer__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--grey);
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer__logo {
+  font-family: var(--font-title);
+  font-size: 3rem;
+}
+
+.footer__links {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.footer__bottom {
+  font-size: 0.8rem;
+  color: var(--grey);
+  text-align: right;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .nav__links { display: none; }
+  
+  .manifeste__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .item {
+    width: 80vw; /* Plus large sur mobile */
+  }
+}
