@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SUB — Collection Capsule 01</title>
-  <meta name="description" content="SUB. Vêtements bruts. Collection capsule." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +13,7 @@
 </head>
 <body>
 
-  <!-- Preloader (statique pour l'instant) -->
+  <!-- Preloader -->
   <div class="preloader">
     <div class="preloader__text">SUB</div>
   </div>
@@ -32,10 +31,10 @@
   <!-- Hero -->
   <section class="hero">
     <h1 class="hero__title">
-      <span class="line">NO</span>
-      <span class="line line--outline">FILTER</span>
-      <span class="line">JUST</span>
-      <span class="line line--red">FORM.</span>
+      <span class="line reveal-text">NO</span>
+      <span class="line line--outline reveal-text">FILTER</span>
+      <span class="line reveal-text">JUST</span>
+      <span class="line line--red reveal-text">FORM.</span>
     </h1>
     <div class="hero__meta">
       <span>Capsule 01</span>
@@ -48,13 +47,13 @@
   <section class="manifeste" id="manifeste">
     <div class="manifeste__grid">
       <div class="manifeste__label">01 / Le Manifeste</div>
-      <p class="manifeste__text">
+      <p class="manifeste__text reveal-text">
         On ne fait pas de la mode. On fait des uniformes pour ceux qui marchent vite. Des pièces coupées pour durer, pas pour les podiums. <span class="highlight">Pas de logo</span>, pas de bruit. Juste la texture, la coupe, et le silence.
       </p>
     </div>
   </section>
 
-  <!-- Collection (Le fameux Scroll Horizontal) -->
+  <!-- Collection (Scroll Horizontal) -->
   <section class="collection" id="collection">
     <div class="collection__header">
       <h2 class="collection__title">LA COLLECTION</h2>
@@ -65,8 +64,8 @@
       
       <!-- Item 1 -->
       <article class="item">
-        <div class="item__img" style="background-color: #222;">
-          <span class="item__placeholder">HOODIE / 01</span>
+        <div class="item__img-wrapper">
+          <img class="item__img" src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1000&auto=format&fit=crop" alt="Hoodie">
         </div>
         <div class="item__info">
           <h3>Hoodie Brut</h3>
@@ -76,8 +75,8 @@
 
       <!-- Item 2 -->
       <article class="item">
-        <div class="item__img" style="background-color: #333;">
-          <span class="item__placeholder">PANT / 02</span>
+        <div class="item__img-wrapper">
+          <img class="item__img" src="https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=1000&auto=format&fit=crop" alt="Pantalon">
         </div>
         <div class="item__info">
           <h3>Cargo Wide</h3>
@@ -87,8 +86,8 @@
 
       <!-- Item 3 -->
       <article class="item">
-        <div class="item__img" style="background-color: #444;">
-          <span class="item__placeholder">TEE / 03</span>
+        <div class="item__img-wrapper">
+          <img class="item__img" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop" alt="T-shirt">
         </div>
         <div class="item__info">
           <h3>Tee Heavyweight</h3>
@@ -98,8 +97,8 @@
 
       <!-- Item 4 -->
       <article class="item">
-        <div class="item__img" style="background-color: #555;">
-          <span class="item__placeholder">JACKET / 04</span>
+        <div class="item__img-wrapper">
+          <img class="item__img" src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1000&auto=format&fit=crop" alt="Veste">
         </div>
         <div class="item__info">
           <h3>Veste Technique</h3>
@@ -110,12 +109,11 @@
     </div>
   </section>
 
-  <!-- Drop 02 (Compte à rebours) -->
+  <!-- Drop 02 -->
   <section class="drop" id="drop">
     <div class="drop__container">
       <div class="drop__label">PROCHAIN DROP</div>
       
-      <!-- Le fameux ticket de métro -->
       <div class="ticket">
         <div class="ticket__top">
           <span>SUB / DROP 02</span>
@@ -148,5 +146,10 @@
     </div>
   </footer>
 
+  <!-- Scripts GSAP & Lenis -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
