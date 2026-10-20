@@ -14,7 +14,7 @@
 }
 
 body {
-  background-color: var(--dark);
+  background-color: var(--dark); /* Fond de secours */
   color: white;
   font-family: var(--font-text);
   overflow-x: hidden;
@@ -36,6 +36,7 @@ body {
   display: flex;
   justify-content: space-between;
   z-index: 10;
+  mix-blend-mode: difference; /* Pour que le texte reste lisible sur tous les fonds */
 }
 
 .nav__logo {
@@ -72,7 +73,7 @@ body {
   font-size: clamp(4rem, 15vw, 15rem);
   line-height: 1;
   letter-spacing: -0.02em;
-  opacity: 1; /* On enlève l'opacité 0, GSAP gérera l'animation */
+  opacity: 0; /* GSAP gérera l'apparition */
 }
 
 .title__warm {
