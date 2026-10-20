@@ -1,10 +1,10 @@
 :root {
   --warm: #ff5500;
   --cold: #00e5ff;
-  --dark: #050505;
+  --dark: #0a0a0c;
   
   --font-title: 'Archivo Black', sans-serif;
-  --font-text: 'Inter', sans-serif;
+  --font-text: 'Space Grotesk', sans-serif;
 }
 
 *, *::before, *::after {
@@ -20,16 +20,15 @@ body {
   overflow-x: hidden;
 }
 
-/* Le canvas 3D fixe en fond */
 #webgl {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: 1;
-  pointer-events: none; /* Laisse passer les clics pour le scroll */
+  pointer-events: none;
 }
 
-/* Interface UI par dessus */
+/* UI */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -37,7 +36,6 @@ body {
   display: flex;
   justify-content: space-between;
   z-index: 10;
-  mix-blend-mode: difference;
 }
 
 .nav__logo {
@@ -58,7 +56,7 @@ body {
 .warm-text { color: var(--warm); }
 .cold-text { color: var(--cold); }
 
-/* Les sections qui permettent le scroll */
+/* Sections */
 .section {
   height: 100vh;
   display: flex;
@@ -66,27 +64,25 @@ body {
   justify-content: center;
   position: relative;
   z-index: 2;
-  pointer-events: none; /* Pour ne pas bloquer la souris */
+  pointer-events: none;
 }
-
-.section--warm { /* Première section */ }
-.section--cold { /* Deuxième section */ }
 
 .title {
   font-family: var(--font-title);
   font-size: clamp(4rem, 15vw, 15rem);
   line-height: 1;
-  opacity: 0; /* On les cache, le JS va les révéler */
+  letter-spacing: -0.02em;
+  opacity: 1; /* On enlève l'opacité 0, GSAP gérera l'animation */
 }
 
 .title__warm {
   color: var(--warm);
-  text-shadow: 0 0 40px rgba(255, 85, 0, 0.5);
+  text-shadow: 0 0 60px rgba(255, 85, 0, 0.4);
 }
 
 .title__cold {
   color: var(--cold);
-  text-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+  text-shadow: 0 0 60px rgba(0, 229, 255, 0.4);
 }
 
 /* Scroll Hint */
@@ -100,8 +96,9 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.2em;
+  font-weight: 600;
   opacity: 0.6;
 }
 
