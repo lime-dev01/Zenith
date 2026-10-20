@@ -1,5 +1,5 @@
 :root {
-  --warm: #ff3300;
+  --warm: #ff5500;
   --cold: #00e5ff;
   --dark: #050505;
   
@@ -34,7 +34,7 @@ body {
   top: 0; left: 0; right: 0;
   padding: 2rem 4rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   z-index: 10;
   mix-blend-mode: difference;
@@ -42,21 +42,9 @@ body {
 
 .nav__logo {
   font-family: var(--font-title);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   letter-spacing: 0.1em;
 }
-
-.nav__links {
-  font-family: var(--font-title);
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
-  display: flex;
-  gap: 1rem;
-}
-
-.divider { opacity: 0.3; }
-.warm-text { color: var(--warm); }
-.cold-text { color: var(--cold); }
 
 /* --- Sections & Textes --- */
 .section {
@@ -97,12 +85,12 @@ body {
 
 .title__warm {
   color: #fff;
-  text-shadow: 0 0 40px rgba(255, 51, 0, 0.5);
+  text-shadow: 0 0 40px rgba(255, 85, 0, 0.4);
 }
 
 .title__cold {
   color: #fff;
-  text-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+  text-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
 }
 
 .desc {
