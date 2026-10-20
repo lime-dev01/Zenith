@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -23,24 +23,19 @@
     </div>
   </header>
 
-  <!-- Section 1 : Chaud (Le désert / Lunettes) -->
+  <!-- Section 1 : Chaud -->
   <section class="section section--warm">
-    <h1 class="title">
-      <span class="title__warm">SOLAIRE</span>
-    </h1>
+    <h1 class="title title__warm">SOLAIRE</h1>
   </section>
 
-  <!-- Section 2 : Froid (La glace / Masque) -->
+  <!-- Section 2 : Froid -->
   <section class="section section--cold">
-    <h1 class="title">
-      <span class="title__cold">POLAIRE</span>
-    </h1>
+    <h1 class="title title__cold">POLAIRE</h1>
   </section>
 
   <!-- Canvas 3D -->
   <canvas id="webgl"></canvas>
 
-  <!-- Indicateur de scroll -->
   <div class="scroll-hint">
     <span>SCROLL TO SHIFT</span>
     <div class="scroll-hint__bar"></div>
@@ -53,7 +48,8 @@
   <script type="importmap">
   {
     "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
     }
   }
   </script>
