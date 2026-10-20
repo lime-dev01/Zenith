@@ -2,7 +2,6 @@
   --warm: #ff5500;
   --cold: #00e5ff;
   --dark: #050505;
-  
   --font-title: 'Archivo Black', sans-serif;
   --font-text: 'Space Grotesk', sans-serif;
 }
@@ -57,9 +56,7 @@ body {
   pointer-events: none;
 }
 
-.text-container {
-  max-width: 600px;
-}
+.text-container { max-width: 600px; }
 
 .text-container--right {
   margin-left: auto;
@@ -101,9 +98,7 @@ body {
   font-weight: 300;
 }
 
-.text-container--right .desc {
-  margin-left: auto;
-}
+.text-container--right .desc { margin-left: auto; }
 
 /* --- Scroll Hint --- */
 .scroll-hint {
