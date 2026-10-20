@@ -1,7 +1,7 @@
 :root {
-  --warm: #ff3300;
+  --warm: #ff5500;
   --cold: #00e5ff;
-  --dark: #050505;
+  --dark: #0a0a0c;
   
   --font-title: 'Archivo Black', sans-serif;
   --font-text: 'Space Grotesk', sans-serif;
@@ -32,7 +32,7 @@ body {
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  padding: 2rem 3rem;
+  padding: 2rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,14 +42,14 @@ body {
 
 .nav__logo {
   font-family: var(--font-title);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   letter-spacing: 0.1em;
 }
 
 .nav__links {
   font-family: var(--font-title);
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
   display: flex;
   gap: 1rem;
 }
@@ -70,7 +70,7 @@ body {
 }
 
 .text-container {
-  max-width: 500px;
+  max-width: 600px;
 }
 
 .text-container--right {
@@ -79,37 +79,38 @@ body {
 }
 
 .subtitle {
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .title {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 6vw, 6rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
 }
 
 .title__warm {
-  color: var(--warm);
-  text-shadow: 0 0 80px rgba(255, 51, 0, 0.4);
+  color: #fff;
+  text-shadow: 0 0 60px rgba(255, 85, 0, 0.3);
 }
 
 .title__cold {
-  color: var(--cold);
-  text-shadow: 0 0 80px rgba(0, 229, 255, 0.4);
+  color: #fff;
+  text-shadow: 0 0 60px rgba(0, 229, 255, 0.3);
 }
 
 .desc {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
-  opacity: 0.7;
+  opacity: 0.5;
   max-width: 350px;
+  font-weight: 300;
 }
 
 .text-container--right .desc {
@@ -127,10 +128,10 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
   font-weight: 600;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .scroll-hint__bar {
