@@ -3,153 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SUB — Collection Capsule 01</title>
+  <title>DUAL — Deux Mondes</title>
+  <meta name="description" content="DUAL. L'équipement pour tous les extrêmes." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Preloader -->
-  <div class="preloader">
-    <div class="preloader__text">SUB</div>
-  </div>
-
-  <!-- Navigation -->
   <header class="nav">
-    <a href="#" class="nav__logo">SUB</a>
-    <nav class="nav__links">
-      <a href="#collection">Collection</a>
-      <a href="#manifeste">Manifeste</a>
-      <a href="#drop">Drop 02</a>
-    </nav>
+    <div class="nav__logo">DUAL®</div>
+    <div class="nav__links">
+      <span class="warm-text">SUN</span>
+      <span class="divider">/</span>
+      <span class="cold-text">SNOW</span>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1 class="hero__title">
-      <span class="line reveal-text">NO</span>
-      <span class="line line--outline reveal-text">FILTER</span>
-      <span class="line reveal-text">JUST</span>
-      <span class="line line--red reveal-text">FORM.</span>
+  <!-- Section 1 : Chaud (Le désert / Lunettes) -->
+  <section class="section section--warm">
+    <h1 class="title">
+      <span class="title__warm">SOLAIRE</span>
     </h1>
-    <div class="hero__meta">
-      <span>Capsule 01</span>
-      <span>Hiver 2025</span>
-      <span>Paris, FR</span>
-    </div>
   </section>
 
-  <!-- Manifeste -->
-  <section class="manifeste" id="manifeste">
-    <div class="manifeste__grid">
-      <div class="manifeste__label">01 / Le Manifeste</div>
-      <p class="manifeste__text reveal-text">
-        On ne fait pas de la mode. On fait des uniformes pour ceux qui marchent vite. Des pièces coupées pour durer, pas pour les podiums. <span class="highlight">Pas de logo</span>, pas de bruit. Juste la texture, la coupe, et le silence.
-      </p>
-    </div>
+  <!-- Section 2 : Froid (La glace / Masque) -->
+  <section class="section section--cold">
+    <h1 class="title">
+      <span class="title__cold">POLAIRE</span>
+    </h1>
   </section>
 
-  <!-- Collection (Scroll Horizontal) -->
-  <section class="collection" id="collection">
-    <div class="collection__header">
-      <h2 class="collection__title">LA COLLECTION</h2>
-    </div>
-    
-    <!-- Le conteneur qui va défiler horizontalement -->
-    <div class="collection__track">
-      
-      <!-- Item 1 -->
-      <article class="item">
-        <div class="item__img-wrapper">
-          <img class="item__img" src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1000&auto=format&fit=crop" alt="Hoodie">
-        </div>
-        <div class="item__info">
-          <h3>Hoodie Brut</h3>
-          <p>180 €</p>
-        </div>
-      </article>
+  <!-- Canvas 3D -->
+  <canvas id="webgl"></canvas>
 
-      <!-- Item 2 -->
-      <article class="item">
-        <div class="item__img-wrapper">
-          <img class="item__img" src="https://images.unsplash.com/photo-1517423568366-8b83523034fd?q=80&w=1000&auto=format&fit=crop" alt="Pantalon">
-        </div>
-        <div class="item__info">
-          <h3>Cargo Wide</h3>
-          <p>150 €</p>
-        </div>
-      </article>
+  <!-- Indicateur de scroll -->
+  <div class="scroll-hint">
+    <span>SCROLL TO SHIFT</span>
+    <div class="scroll-hint__bar"></div>
+  </div>
 
-      <!-- Item 3 -->
-      <article class="item">
-        <div class="item__img-wrapper">
-          <img class="item__img" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop" alt="T-shirt">
-        </div>
-        <div class="item__info">
-          <h3>Tee Heavyweight</h3>
-          <p>65 €</p>
-        </div>
-      </article>
-
-      <!-- Item 4 -->
-      <article class="item">
-        <div class="item__img-wrapper">
-          <img class="item__img" src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1000&auto=format&fit=crop" alt="Veste">
-        </div>
-        <div class="item__info">
-          <h3>Veste Technique</h3>
-          <p>290 €</p>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- Drop 02 -->
-  <section class="drop" id="drop">
-    <div class="drop__container">
-      <div class="drop__label">PROCHAIN DROP</div>
-      
-      <div class="ticket">
-        <div class="ticket__top">
-          <span>SUB / DROP 02</span>
-          <span>ACCÈS ANTICIPÉ</span>
-        </div>
-        <div class="ticket__timer">
-          <span>14j : 02h : 45m : 12s</span>
-        </div>
-        <div class="ticket__bottom">
-          <span>NE PAS PERDRE</span>
-          <span>PARIS</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer__row">
-      <div class="footer__logo">SUB</div>
-      <div class="footer__links">
-        <a href="#">Instagram</a>
-        <a href="#">Contact</a>
-        <a href="#">Mentions Légales</a>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <span>© 2025 SUB. Tous droits réservés.</span>
-    </div>
-  </footer>
-
-  <!-- Scripts GSAP & Lenis -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="main.js"></script>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+
+  <script type="module" src="main.js"></script>
 </body>
 </html>
