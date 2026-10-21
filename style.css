@@ -15,6 +15,7 @@ body {
   overflow-x: hidden;
 }
 
+/* --- Fond Vidéo --- */
 .bg-video {
   position: fixed;
   top: 0; left: 0;
@@ -27,11 +28,12 @@ body {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.25); /* Léger assombrissement */
   z-index: 2;
   pointer-events: none;
 }
 
+/* --- Nav --- */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -43,8 +45,10 @@ body {
 }
 
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
-.nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+.nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-left: 2rem; transition: opacity 0.3s; }
+.nav__links a:hover { opacity: 1; }
 
+/* --- Sections Vidéo --- */
 .section {
   height: 100vh;
   position: relative;
@@ -59,7 +63,7 @@ body {
   transform: translateY(-50%);
   max-width: 600px;
   pointer-events: auto;
-  overflow: hidden; /* Nécessaire pour l'effet de masque */
+  overflow: hidden; 
 }
 
 .text-container--right {
@@ -85,23 +89,14 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* On cache le texte de base pour que GSAP puisse l'animer */
-.title span {
-  display: inline-block;
-  will-change: transform;
-}
+.title span { display: inline-block; will-change: transform; }
 
 .title__warm { text-shadow: 0 0 40px rgba(255, 85, 0, 0.5); }
 .title__cold { text-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
 
-.desc {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  opacity: 0.9;
-  font-weight: 300;
-}
+.desc { font-size: 1.1rem; line-height: 1.6; opacity: 0.9; font-weight: 300; }
 
-/* --- Section Specs (Verre dépoli) --- */
+/* --- Section Specs --- */
 .specs {
   position: relative;
   z-index: 10;
@@ -109,12 +104,14 @@ body {
   background: var(--dark);
 }
 
+.specs__header { max-width: 600px; margin-bottom: 4rem; }
+.specs__header h2 { font-family: var(--font-title); font-size: 3rem; margin-bottom: 1rem; }
+.specs__header p { opacity: 0.6; font-size: 1.1rem; line-height: 1.6; }
+
 .specs__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .spec-card {
@@ -125,11 +122,19 @@ body {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.spec-card h3 {
-  font-family: var(--font-title);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--cold);
+.spec-card h3 { font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 1rem; color: var(--cold); }
+.spec-card p { opacity: 0.6; line-height: 1.6; font-size: 0.95rem; }
+
+/* --- Footer --- */
+.footer {
+  position: relative;
+  z-index: 10;
+  padding: 6rem 10vw;
+  background: #000;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-.spec-card p { opacity: 0.6; line-height: 1.6; }
+.footer__content { max-width: 800px; margin: 0 auto; text-align: center; }
+.footer h2 { font-family: var(--font-title); font-size: 4rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+.footer p { opacity: 0.5; margin-bottom: 4rem; }
+.footer__bottom { display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
