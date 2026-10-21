@@ -7,37 +7,52 @@ gsap.ticker.add((t) => { lenis.raf(t * 1000); });
 gsap.ticker.lagSmoothing(0);
 gsap.registerPlugin(ScrollTrigger);
 
-/* 2. Vidéo & Timeline de texte */
+/* 2. Setup Vidéo et Textes */
 const video = document.getElementById('scroll-video');
 video.pause();
 
-// On cache le texte froid au départ avec GSAP
+// On cache le texte froid au départ
 gsap.set('.fade-text-cold', { opacity: 0 });
-gsap.set('.fade-text-cold .title span', { y: 100 }); // Le texte est poussé vers le bas
+gsap.set('.fade-text-cold .title span', { y: 100 }); // Poussé vers le bas pour l'effet masque
 gsap.set('.fade-text-cold .desc', { opacity: 0, y: 20 });
 
-// La timeline de transition du texte
-const textTransition = gsap.timeline({ paused: true });
+let isTransitioning = false;
 
-textTransition
-  // Le texte chaud part en fondu propre
-  .to('.fade-text-warm', { opacity: 0, y: -20, duration: 0.5 })
-  // Le texte froid apparaît avec un effet de masque (il monte)
-  .to('.fade-text-cold', { opacity: 1, duration: 0.1 }, "-=0.2")
-  .to('.fade-text-cold .title span', { y: 0, duration: 1, ease: 'power4.out', stagger: 0.1 }, "-=0.1")
-  .to('.fade-text-cold .desc', { opacity: 1, y: 0, duration: 0.8 }, "-=0.5");
-
-/* 3. Le Scroll déclenche tout */
+/* 3. Le Scroll déclenche la séquence (une seule fois) */
 ScrollTrigger.create({
-  trigger: '.section:nth-child(3)', // La section froide
-  start: 'top 60%', // Se déclenche quand la section est à 60% de l'écran
+  trigger: '.section--cold',
+  start: 'top 80%', // Se déclenche quand on approche de la section froide
   onEnter: () => {
-    video.play(); // On lance la vidéo
-    textTransition.play(); // On lance l'animation du texte (qui dure ~1.5s, le temps que la vidéo transitionne)
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    // 1. On lance la vidéo (qui dure ~5s)
+    video.play();
+
+    // 2. Le texte chaud s'efface immédiatement
+    gsap.to('.fade-text-warm', { opacity: 0, y: -30, duration: 0.8 });
+
+    // 3. On attend que la vidéo fasse sa transition (2.5s) pour afficher le texte froid
+    setTimeout(() => {
+      gsap.to('.fade-text-cold', { opacity: 1, duration: 0.1 });
+      gsap.to('.fade-text-cold .title span', { 
+        y: 0, 
+        duration: 1, 
+        ease: 'power4.out', 
+        stagger: 0.1 
+      });
+      gsap.to('.fade-text-cold .desc', { opacity: 1, y: 0, duration: 0.8, delay: 0.2 });
+    }, 2500); // 2.5 secondes de délai
   },
   onLeaveBack: () => {
+    // Si on remonte tout en haut, on reset tout
+    isTransitioning = false;
     video.pause();
     video.currentTime = 0;
-    textTransition.reverse(); // Si on remonte, le texte redevient chaud
+    
+    gsap.to('.fade-text-warm', { opacity: 1, y: 0, duration: 0.5 });
+    gsap.to('.fade-text-cold', { opacity: 0, duration: 0.3 });
+    gsap.set('.fade-text-cold .title span', { y: 100 });
+    gsap.set('.fade-text-cold .desc', { opacity: 0, y: 20 });
   }
 });
