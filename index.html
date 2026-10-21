@@ -13,46 +13,46 @@
 </head>
 <body>
 
+  <!-- Header -->
   <header class="nav">
     <div class="nav__logo">ZÉNITH®</div>
   </header>
 
-  <section class="section">
+  <!-- La vidéo en fond (fixe) -->
+  <video id="scroll-video" class="bg-video" muted playsinline preload="auto">
+    <source src="assets/video.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Overlay sombre pour la lisibilité du texte -->
+  <div class="overlay"></div>
+
+  <!-- Section 1 : Le Désert (Chaud) -->
+  <section class="section section--warm">
     <div class="text-container fade-text-warm">
       <p class="subtitle">01 — Zone Aride</p>
       <h1 class="title title__warm">L'ÉCLAT<br>DU SOLEIL</h1>
-      <p class="desc">Verres polarisés, monture en titane. Conçu pour dominer la fournaise.</p>
+      <p class="desc">Verres polarisés, monture en titane.<br>Conçu pour dominer la fournaise.</p>
     </div>
   </section>
 
-  <section class="section">
+  <!-- Section 2 : La Banquise (Froid) -->
+  <section class="section section--cold">
     <div class="text-container text-container--right fade-text-cold">
       <p class="subtitle">02 — Zéro Absolu</p>
       <h1 class="title title__cold">L'INSTINCT<br>DU FROID</h1>
-      <p class="desc">Vision panoramique, traitement anti-buée. Dominez les sommets.</p>
+      <p class="desc">Vision panoramique, traitement anti-buée.<br>Dominez les sommets.</p>
     </div>
   </section>
 
-  <canvas id="webgl"></canvas>
-
+  <!-- Indicateur de scroll -->
   <div class="scroll-hint">
-    <span>DÉFILER</span>
+    <span>DÉFILER POUR CHANGER DE CLIMAT</span>
     <div class="scroll-hint__bar"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-    }
-  }
-  </script>
-
-  <script type="module" src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
