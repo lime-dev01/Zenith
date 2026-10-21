@@ -7,50 +7,48 @@ gsap.ticker.add((t) => { lenis.raf(t * 1000); });
 gsap.ticker.lagSmoothing(0);
 gsap.registerPlugin(ScrollTrigger);
 
-/* 2. La Vidéo */
+/* 2. Vidéo */
 const video = document.getElementById('scroll-video');
-video.pause(); // On la met en pause au début
+video.pause();
 
-/* 3. Le Scroll déclenche la vidéo */
-// Quand la 2ème section arrive à l'écran, la vidéo joue
+// On déclenche la vidéo DÈS QUE la section froide commence à pointer le bout de son nez
 ScrollTrigger.create({
   trigger: '.section--cold',
-  start: 'top center', // Se déclenche quand la section froide est au milieu
+  start: 'top 90%', // Se déclenche quand le haut de la section froide est à 90% de l'écran (donc très vite)
   onEnter: () => {
     video.play();
   },
   onLeaveBack: () => {
-    // Si on remonte tout en haut, on remet la vidéo au début et on la met en pause
     video.pause();
     video.currentTime = 0;
   }
 });
 
-/* 4. Animation des Textes */
-// Le texte chaud disparaît quand on scrolle
+/* 3. Synchronisation parfaite des textes */
+// Le texte chaud part en même temps que la vidéo joue
 gsap.to('.fade-text-warm', {
   opacity: 0,
   y: -50,
-  duration: 1,
+  duration: 0.5,
   scrollTrigger: {
     trigger: '.section--cold',
-    start: 'top bottom',
-    end: 'top center',
+    start: 'top 90%',
+    end: 'top 40%',
     scrub: true,
   }
 });
 
-// Le texte froid apparaît
+// Le texte froid arrive exactement au même moment
 gsap.fromTo('.fade-text-cold',
   { opacity: 0, y: 50 },
   {
     opacity: 1,
     y: 0,
-    duration: 1,
+    duration: 0.5,
     scrollTrigger: {
       trigger: '.section--cold',
-      start: 'top bottom',
-      end: 'top center',
+      start: 'top 90%',
+      end: 'top 40%',
       scrub: true,
     }
   }
