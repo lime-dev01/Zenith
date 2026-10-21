@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZÉNITH® — L'Ingénierie</title>
+  <title>ZÉNITH® — Extrêmes</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,34 +15,60 @@
 
   <header class="nav">
     <div class="nav__logo">ZÉNITH®</div>
-    <div class="nav__links">
-      <a href="#tech">Technologie</a>
-    </div>
   </header>
 
-  <!-- SECTION : L'ÉCRIN TECHNIQUE -->
-  <section class="scene-tech" id="tech">
+  <!-- =========================================
+       SCÈNES 1 & 2 : LA VIDÉO DE TRANSITION
+       ========================================= -->
+  <section class="scene-video">
+    <!-- Ta première vidéo -->
+    <video id="video-1" class="bg-video" muted playsinline preload="auto">
+      <source src="video-1.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Texte Chaud -->
+    <div class="text-container fade-text-warm">
+      <p class="subtitle">01 — Zone Aride</p>
+      <h1 class="title title__warm"><span>L'ÉCLAT</span><br><span>DU SOLEIL</span></h1>
+      <p class="desc">Verres polarisés, monture en titane.<br>Conçu pour dominer la fournaise.</p>
+    </div>
+
+    <!-- Texte Froid -->
+    <div class="text-container text-container--right fade-text-cold">
+      <p class="subtitle">02 — Zéro Absolu</p>
+      <h1 class="title title__cold"><span>L'INSTINCT</span><br><span>DU FROID</span></h1>
+      <p class="desc">Vision panoramique, traitement anti-buée.<br>Dominez les sommets.</p>
+    </div>
+  </section>
+
+  <!-- =========================================
+       SCÈNE 3 : L'ÉCRIN TECHNIQUE
+       ========================================= -->
+  <section class="scene-tech">
     <div class="sticky-container">
       
-      <!-- La vidéo générée sur Flow (Transition + Révélation) -->
-      <video id="tech-video" class="tech-video" muted playsinline preload="auto">
-        <source src="tech-transition.mp4" type="video/mp4" />
-      </video>
-
-      <!-- Les lignes techniques et textes (Cachés au début) -->
-      <div class="tech-overlay">
+      <!-- 
+        ⚠️ PRÉPARATION POUR DEMAIN ⚠️
+        Aujourd'hui, on utilise l'image (car ta vidéo est en 360p).
+        Demain, tu supprimeras la balise <img> ci-dessous et tu la remplaceras par :
         
-        <!-- Lignes SVG -->
+        <video id="video-2" class="tech-media" muted playsinline preload="auto" autoplay loop>
+          <source src="video-2.mp4" type="video/mp4" />
+        </video>
+        
+        Et le code JS gérera automatiquement l'allumage.
+      -->
+      <img id="tech-media" src="image-tech.jpg" class="tech-media" alt="Produits Zénith" />
+
+      <!-- Overlay : Lignes et Textes -->
+      <div class="tech-overlay">
         <svg class="blueprint" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <!-- Côté Lunettes (Chaud) -->
           <path class="line line--warm" d="M 30 50 L 15 30" />
           <path class="line line--warm" d="M 35 55 L 20 75" />
-          <!-- Côté Masque (Froid) -->
           <path class="line line--cold" d="M 70 50 L 85 30" />
           <path class="line line--cold" d="M 65 55 L 80 75" />
         </svg>
 
-        <!-- Textes Techniques -->
         <div class="specs">
           <div class="spec spec--warm">
             <h3>Titane Aérospatial</h3>
@@ -52,7 +78,6 @@
             <h3>Verre Monobloc</h3>
             <p>Vision périphérique totale.</p>
           </div>
-
           <div class="spec spec--cold">
             <h3>Zéro Distorsion</h3>
             <p>Clarté optique absolue.</p>
@@ -63,9 +88,7 @@
           </div>
         </div>
 
-        <!-- Titre final -->
         <h2 class="tech-title">L'Ingénierie<br>de l'Extrême.</h2>
-
       </div>
     </div>
   </section>
