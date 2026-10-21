@@ -6,11 +6,7 @@
   --font-text: 'Space Grotesk', sans-serif;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background-color: var(--dark);
@@ -19,7 +15,6 @@ body {
   overflow-x: hidden;
 }
 
-/* --- Vidéo & Overlay --- */
 .bg-video {
   position: fixed;
   top: 0; left: 0;
@@ -32,12 +27,11 @@ body {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.3); /* Assombrit très légèrement pour lire le texte */
+  background: rgba(0, 0, 0, 0.2);
   z-index: 2;
   pointer-events: none;
 }
 
-/* --- Header --- */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -53,15 +47,14 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* --- Sections (Le Scroll) --- */
+/* On repasse à 100vh pour que le scroll soit direct */
 .section {
-  height: 200vh; /* 2 écrans de scroll pour chaque section pour prendre le temps de voir la vidéo */
+  height: 100vh; 
   position: relative;
   z-index: 5;
   pointer-events: none;
 }
 
-/* On fixe les conteneurs de texte pour qu'ils restent centrés pendant qu'on scrolle */
 .text-container {
   position: fixed;
   top: 50%;
@@ -76,7 +69,6 @@ body {
   text-align: right;
 }
 
-/* --- Typographie --- */
 .subtitle {
   font-size: 0.7rem;
   letter-spacing: 0.4em;
@@ -104,7 +96,6 @@ body {
   font-weight: 300;
 }
 
-/* --- Scroll Hint --- */
 .scroll-hint {
   position: fixed;
   bottom: 2rem;
@@ -119,24 +110,16 @@ body {
   letter-spacing: 0.2em;
   font-weight: 600;
   opacity: 0.5;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
 .scroll-hint__bar {
-  width: 1px;
-  height: 40px;
-  background: white;
-  position: relative;
-  overflow: hidden;
+  width: 1px; height: 40px; background: white;
+  position: relative; overflow: hidden;
 }
 
 .scroll-hint__bar::after {
   content: '';
-  position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
   background: white;
   animation: scrollDown 1.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
 }
