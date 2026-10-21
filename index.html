@@ -17,78 +17,28 @@
     <div class="nav__logo">ZÉNITH®</div>
   </header>
 
-  <!-- =========================================
-       SCÈNES 1 & 2 : LA VIDÉO
-       ========================================= -->
-  <section class="scene-video">
-    <video id="video-1" class="bg-video" muted playsinline preload="auto">
-      <source src="video-1.mp4" type="video/mp4" />
-    </video>
+  <video id="scroll-video" class="bg-video" muted playsinline preload="auto">
+    <source src="video-1.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
 
-    <!-- Texte Chaud -->
+  <!-- Section 1 : CHAUD -->
+  <section class="section section--warm">
     <div class="text-container fade-text-warm">
       <p class="subtitle">01 — Zone Aride</p>
       <h1 class="title title__warm">L'ÉCLAT<br>DU SOLEIL</h1>
       <p class="desc">Verres polarisés, monture en titane.<br>Conçu pour dominer la fournaise.</p>
     </div>
+  </section>
 
-    <!-- Texte Froid (Caché au départ) -->
+  <!-- Section 2 : FROID -->
+  <section class="section section--cold">
     <div class="text-container text-container--right fade-text-cold">
       <p class="subtitle">02 — Zéro Absolu</p>
       <h1 class="title title__cold">L'INSTINCT<br>DU FROID</h1>
       <p class="desc">Vision panoramique, traitement anti-buée.<br>Dominez les sommets.</p>
     </div>
   </section>
-
-  <!-- =========================================
-       SCÈNE 3 : L'ÉCRIN TECHNIQUE (Prêt pour la vidéo)
-       ========================================= -->
-  <section class="scene-tech">
-    <div class="sticky-container">
-      
-      <!-- 
-        Le conteneur média. 
-        Demain, tu glisseras ta balise <video> ici à la place de la div.
-        Aujourd'hui, c'est une div noire.
-      -->
-      <div id="media-container" class="tech-media">
-        <!-- <video id="video-2" src="video-2.mp4" muted playsinline></video> -->
-      </div>
-
-      <!-- Overlay : Lignes et Textes -->
-      <div class="tech-overlay">
-        <svg class="blueprint" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path class="line line--warm" d="M 30 50 L 15 30" />
-          <path class="line line--warm" d="M 35 55 L 20 75" />
-          <path class="line line--cold" d="M 70 50 L 85 30" />
-          <path class="line line--cold" d="M 65 55 L 80 75" />
-        </svg>
-
-        <div class="specs">
-          <div class="spec spec--warm">
-            <h3>Titane Aérospatial</h3>
-            <p>Ultra-léger, ultra-résistant.</p>
-          </div>
-          <div class="spec spec--warm" style="top: 70%;">
-            <h3>Verre Monobloc</h3>
-            <p>Vision périphérique totale.</p>
-          </div>
-          <div class="spec spec--cold">
-            <h3>Zéro Distorsion</h3>
-            <p>Clarté optique absolue.</p>
-          </div>
-          <div class="spec spec--cold" style="top: 70%;">
-            <h3>Filtre Cat. 4</h3>
-            <p>Protection UV maximale.</p>
-          </div>
-        </div>
-
-        <h2 class="tech-title">L'Ingénierie<br>de l'Extrême.</h2>
-      </div>
-    </div>
-  </section>
-
-  <div style="height: 100vh; background: #050505;"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
