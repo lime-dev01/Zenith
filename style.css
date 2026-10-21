@@ -15,6 +15,7 @@ body {
   overflow-x: hidden;
 }
 
+/* --- Fond Vidéo --- */
 .bg-video {
   position: fixed;
   top: 0; left: 0;
@@ -27,16 +28,19 @@ body {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 2;
   pointer-events: none;
 }
 
+/* --- Nav --- */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   padding: 2rem 4rem;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 10;
   mix-blend-mode: difference;
 }
@@ -47,12 +51,29 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* On repasse à 100vh pour que le scroll soit direct */
+.nav__links {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.nav__links a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.nav__links a:hover { opacity: 1; }
+
+/* --- Sections Vidéo --- */
 .section {
-  height: 100vh; 
+  height: 100vh;
   position: relative;
   z-index: 5;
-  pointer-events: none;
+  pointer-events: none; /* Le texte laisse passer le scroll */
 }
 
 .text-container {
@@ -61,6 +82,7 @@ body {
   left: 10vw;
   transform: translateY(-50%);
   max-width: 600px;
+  pointer-events: auto;
 }
 
 .text-container--right {
@@ -75,7 +97,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 1rem;
   font-weight: 600;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .title {
@@ -86,46 +108,116 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.title__warm { color: #fff; text-shadow: 0 0 40px rgba(255, 85, 0, 0.5); }
-.title__cold { color: #fff; text-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
+.title__warm { text-shadow: 0 0 40px rgba(255, 85, 0, 0.5); }
+.title__cold { text-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
 
 .desc {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.6;
-  opacity: 0.8;
+  opacity: 0.9;
   font-weight: 300;
+  margin-bottom: 2rem;
 }
 
-.scroll-hint {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-  opacity: 0.5;
-}
-
-.scroll-hint__bar {
-  width: 1px; height: 40px; background: white;
-  position: relative; overflow: hidden;
-}
-
-.scroll-hint__bar::after {
-  content: '';
-  position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+/* --- Boutons --- */
+.btn {
   background: white;
-  animation: scrollDown 1.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+  color: black;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: var(--font-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
 
-@keyframes scrollDown {
-  0% { top: -100%; }
-  50% { top: 100%; }
-  100% { top: 100%; }
+.btn:hover { background: var(--warm); color: white; }
+.btn--cold:hover { background: var(--cold); color: black; }
+
+/* --- Section Specs (Verre dépoli) --- */
+.specs {
+  position: relative;
+  z-index: 10;
+  padding: 8rem 10vw;
+  background: var(--dark);
 }
+
+.specs__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.spec-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s;
+}
+
+.spec-card:hover { transform: translateY(-5px); }
+
+.spec-card h3 {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--cold);
+}
+
+.spec-card p {
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+/* --- Footer --- */
+.footer {
+  position: relative;
+  z-index: 10;
+  padding: 8rem 10vw;
+  background: #000;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer h2 {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.footer p { opacity: 0.6; margin-bottom: 2rem; }
+
+.footer__form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto 4rem;
+}
+
+.footer__form input {
+  padding: 1rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  flex: 1;
+  font-family: var(--font-text);
+}
+
+.footer__form button {
+  padding: 1rem 2rem;
+  background: white;
+  color: black;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.footer__copy { font-size: 0.8rem; margin-bottom: 0; }
