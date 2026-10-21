@@ -15,7 +15,6 @@ body {
   overflow-x: hidden;
 }
 
-/* --- Fond Vidéo --- */
 .bg-video {
   position: fixed;
   top: 0; left: 0;
@@ -28,52 +27,29 @@ body {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
   z-index: 2;
   pointer-events: none;
 }
 
-/* --- Nav --- */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   padding: 2rem 4rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   z-index: 10;
   mix-blend-mode: difference;
 }
 
-.nav__logo {
-  font-family: var(--font-title);
-  font-size: 1.4rem;
-  letter-spacing: 0.1em;
-}
+.nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
+.nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
 
-.nav__links {
-  display: flex;
-  gap: 2rem;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.nav__links a {
-  color: white;
-  text-decoration: none;
-  opacity: 0.7;
-  transition: opacity 0.3s;
-}
-
-.nav__links a:hover { opacity: 1; }
-
-/* --- Sections Vidéo --- */
 .section {
   height: 100vh;
   position: relative;
   z-index: 5;
-  pointer-events: none; /* Le texte laisse passer le scroll */
+  pointer-events: none;
 }
 
 .text-container {
@@ -83,6 +59,7 @@ body {
   transform: translateY(-50%);
   max-width: 600px;
   pointer-events: auto;
+  overflow: hidden; /* Nécessaire pour l'effet de masque */
 }
 
 .text-container--right {
@@ -108,6 +85,12 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* On cache le texte de base pour que GSAP puisse l'animer */
+.title span {
+  display: inline-block;
+  will-change: transform;
+}
+
 .title__warm { text-shadow: 0 0 40px rgba(255, 85, 0, 0.5); }
 .title__cold { text-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
 
@@ -116,26 +99,7 @@ body {
   line-height: 1.6;
   opacity: 0.9;
   font-weight: 300;
-  margin-bottom: 2rem;
 }
-
-/* --- Boutons --- */
-.btn {
-  background: white;
-  color: black;
-  border: none;
-  padding: 1rem 2rem;
-  font-family: var(--font-text);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-}
-
-.btn:hover { background: var(--warm); color: white; }
-.btn--cold:hover { background: var(--cold); color: black; }
 
 /* --- Section Specs (Verre dépoli) --- */
 .specs {
@@ -154,15 +118,12 @@ body {
 }
 
 .spec-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 3rem 2rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: transform 0.3s;
 }
-
-.spec-card:hover { transform: translateY(-5px); }
 
 .spec-card h3 {
   font-family: var(--font-title);
@@ -171,53 +132,4 @@ body {
   color: var(--cold);
 }
 
-.spec-card p {
-  opacity: 0.7;
-  line-height: 1.6;
-}
-
-/* --- Footer --- */
-.footer {
-  position: relative;
-  z-index: 10;
-  padding: 8rem 10vw;
-  background: #000;
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.footer h2 {
-  font-family: var(--font-title);
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.footer p { opacity: 0.6; margin-bottom: 2rem; }
-
-.footer__form {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  max-width: 500px;
-  margin: 0 auto 4rem;
-}
-
-.footer__form input {
-  padding: 1rem;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
-  flex: 1;
-  font-family: var(--font-text);
-}
-
-.footer__form button {
-  padding: 1rem 2rem;
-  background: white;
-  color: black;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.footer__copy { font-size: 0.8rem; margin-bottom: 0; }
+.spec-card p { opacity: 0.6; line-height: 1.6; }
