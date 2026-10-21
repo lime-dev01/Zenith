@@ -23,8 +23,7 @@ ScrollTrigger.create({
   }
 });
 
-/* 3. Animation des textes (Sans chevauchement) */
-// Le texte chaud disparaît
+/* 3. Animation des textes */
 gsap.to('.fade-text-warm', {
   opacity: 0,
   y: -50,
@@ -37,7 +36,6 @@ gsap.to('.fade-text-warm', {
   }
 });
 
-// Le texte froid apparaît
 gsap.fromTo('.fade-text-cold',
   { opacity: 0, y: 50 },
   {
