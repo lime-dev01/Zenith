@@ -26,16 +26,13 @@ body {
 /* =========================================
    SCÈNES 1 & 2 (Vidéo)
    ========================================= */
-.scene-video {
-  height: 300vh; 
-  position: relative;
-  z-index: 1;
-}
+.scene-video { height: 300vh; position: relative; z-index: 1; }
 
 .bg-video {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
   object-fit: cover; z-index: 1;
+  background: #000; /* Fond noir si la vidéo ne charge pas */
 }
 
 .text-container {
@@ -44,9 +41,7 @@ body {
   max-width: 600px; z-index: 10;
 }
 
-.text-container--right {
-  left: auto; right: 10vw; text-align: right;
-}
+.text-container--right { left: auto; right: 10vw; text-align: right; }
 
 .subtitle {
   font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
@@ -67,11 +62,7 @@ body {
 /* =========================================
    SCÈNE 3 (Écrin Technique)
    ========================================= */
-.scene-tech {
-  height: 300vh;
-  position: relative;
-  z-index: 2;
-}
+.scene-tech { height: 300vh; position: relative; z-index: 2; }
 
 .sticky-container {
   position: sticky; top: 0;
@@ -80,12 +71,13 @@ body {
   background: #000;
 }
 
-/* L'image ou la vidéo qui s'allume */
+/* Le média (Vidéo). Il est noir au début. */
 .tech-media {
   position: absolute; top: 0; left: 0;
   width: 100%; height: 100%;
   object-fit: cover; z-index: 1;
   filter: brightness(0); /* Caché au début */
+  background: #000;
 }
 
 .tech-overlay {
@@ -94,9 +86,7 @@ body {
   z-index: 2; pointer-events: none;
 }
 
-.blueprint {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-}
+.blueprint { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 .line {
   fill: none; stroke-width: 0.15;
