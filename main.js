@@ -23,7 +23,6 @@ ScrollTrigger.create({
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
-    // Déclenchement de la vidéo
     if (self.progress > 0.2 && !isTransitioning) {
       isTransitioning = true;
       video1.play();
@@ -32,10 +31,9 @@ ScrollTrigger.create({
       setTimeout(() => {
         gsap.to('.fade-text-cold', { opacity: 1, duration: 0.1 });
         gsap.to('.fade-text-cold .title span', { y: 0, duration: 1, ease: 'power4.out', stagger: 0.1 });
-      }, 2500); // Synchronisé avec ta vidéo
+      }, 2500);
     }
     
-    // Reset si on remonte
     if (self.progress < 0.1 && isTransitioning) {
       isTransitioning = false;
       video1.pause();
@@ -47,5 +45,36 @@ ScrollTrigger.create({
   }
 });
 
-/*
-  .to('.tech-title', { op
+/* =========================================
+   SCÈNE 3 (Prête pour la vidéo de demain)
+   ========================================= */
+// On cible la balise vidéo
+const video2 = document.getElementById('video-2');
+video2.pause();
+
+const techTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '.scene-tech',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 1,
+  }
+});
+
+// On allume la vidéo (de brightness 0 à 1)
+techTl.to('.tech-media', { filter: 'brightness(1)', duration: 1 }, 0)
+  .to('.line--warm', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, 0.5)
+  .to('.line--cold', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, 0.5)
+  .to('.spec', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }, 0.8)
+  .to('.tech-title', { opacity: 1, duration: 1 }, 1);
+
+// Optionnel : Faire jouer la vidéo quand on est dessus (si tu veux qu'elle boucle)
+ScrollTrigger.create({
+  trigger: '.scene-tech',
+  start: 'top 50%',
+  onEnter: () => video2.play(),
+  onLeaveBack: () => {
+    video2.pause();
+    video2.currentTime = 0;
+  }
+});
