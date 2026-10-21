@@ -1,7 +1,7 @@
 :root {
+  --dark: #050505;
   --warm: #ff5500;
   --cold: #00e5ff;
-  --dark: #050505;
   --font-title: 'Archivo Black', sans-serif;
   --font-text: 'Space Grotesk', sans-serif;
 }
@@ -15,25 +15,6 @@ body {
   overflow-x: hidden;
 }
 
-/* --- Fond Vidéo --- */
-.bg-video {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  object-fit: cover;
-  z-index: 1;
-}
-
-.overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.25); /* Léger assombrissement */
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* --- Nav --- */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -45,96 +26,88 @@ body {
 }
 
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
-.nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-left: 2rem; transition: opacity 0.3s; }
-.nav__links a:hover { opacity: 1; }
 
-/* --- Sections Vidéo --- */
-.section {
-  height: 100vh;
+/* --- Scène Tech --- */
+.scene-tech {
+  height: 300vh; /* Hauteur pour permettre le pin et le scroll */
   position: relative;
-  z-index: 5;
+}
+
+.sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* La vidéo */
+.tech-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* L'overlay (Lignes et textes) */
+.tech-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 2;
   pointer-events: none;
 }
 
-.text-container {
-  position: fixed;
-  top: 50%;
-  left: 10vw;
-  transform: translateY(-50%);
-  max-width: 600px;
-  pointer-events: auto;
-  overflow: hidden; 
+/* Les lignes SVG */
+.blueprint {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
 }
 
-.text-container--right {
-  left: auto;
-  right: 10vw;
-  text-align: right;
+.line {
+  fill: none;
+  stroke-width: 0.15;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50; /* Caché au début */
 }
 
-.subtitle {
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  opacity: 0.8;
+.line--warm { stroke: var(--warm); filter: drop-shadow(0 0 8px var(--warm)); }
+.line--cold { stroke: var(--cold); filter: drop-shadow(0 0 8px var(--cold)); }
+
+/* Les textes */
+.spec {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(10px);
 }
 
-.title {
+.spec--warm { left: 5vw; top: 30%; text-align: left; }
+.spec--cold { right: 5vw; top: 30%; text-align: right; }
+
+.spec h3 {
   font-family: var(--font-title);
-  font-size: clamp(3rem, 7vw, 7rem);
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.spec--warm h3 { color: var(--warm); }
+.spec--cold h3 { color: var(--cold); }
+
+.spec p { font-size: 0.9rem; opacity: 0.6; font-weight: 300; }
+
+.tech-title {
+  position: absolute;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 5vw, 4rem);
+  text-align: center;
   line-height: 0.9;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
+  opacity: 0;
+  color: white;
 }
-
-.title span { display: inline-block; will-change: transform; }
-
-.title__warm { text-shadow: 0 0 40px rgba(255, 85, 0, 0.5); }
-.title__cold { text-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
-
-.desc { font-size: 1.1rem; line-height: 1.6; opacity: 0.9; font-weight: 300; }
-
-/* --- Section Specs --- */
-.specs {
-  position: relative;
-  z-index: 10;
-  padding: 8rem 10vw;
-  background: var(--dark);
-}
-
-.specs__header { max-width: 600px; margin-bottom: 4rem; }
-.specs__header h2 { font-family: var(--font-title); font-size: 3rem; margin-bottom: 1rem; }
-.specs__header p { opacity: 0.6; font-size: 1.1rem; line-height: 1.6; }
-
-.specs__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.spec-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 3rem 2rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.spec-card h3 { font-family: var(--font-title); font-size: 1.5rem; margin-bottom: 1rem; color: var(--cold); }
-.spec-card p { opacity: 0.6; line-height: 1.6; font-size: 0.95rem; }
-
-/* --- Footer --- */
-.footer {
-  position: relative;
-  z-index: 10;
-  padding: 6rem 10vw;
-  background: #000;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.footer__content { max-width: 800px; margin: 0 auto; text-align: center; }
-.footer h2 { font-family: var(--font-title); font-size: 4rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
-.footer p { opacity: 0.5; margin-bottom: 4rem; }
-.footer__bottom { display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
