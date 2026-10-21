@@ -13,42 +13,70 @@
 </head>
 <body>
 
-  <!-- Header -->
   <header class="nav">
     <div class="nav__logo">ZÉNITH®</div>
+    <div class="nav__links">
+      <a href="#tech">Technologie</a>
+      <a href="#shop">Boutique</a>
+    </div>
   </header>
 
-  <!-- La vidéo en fond (fixe) -->
+  <!-- Vidéo de transition en fond -->
   <video id="scroll-video" class="bg-video" muted playsinline preload="auto">
     <source src="video.mp4" type="video/mp4" />
   </video>
-
-  <!-- Overlay sombre pour la lisibilité du texte -->
   <div class="overlay"></div>
 
-  <!-- Section 1 : Le Désert (Chaud) -->
+  <!-- SECTION 1 : CHAUD -->
   <section class="section section--warm">
     <div class="text-container fade-text-warm">
-      <p class="subtitle">01 — Zone Aride</p>
+      <p class="subtitle">01 — Éclipse Totale</p>
       <h1 class="title title__warm">L'ÉCLAT<br>DU SOLEIL</h1>
-      <p class="desc">Verres polarisés, monture en titane.<br>Conçu pour dominer la fournaise.</p>
+      <p class="desc">Verres polarisés, monture en titane. Conçu pour dominer la fournaise.</p>
+      <button class="btn">Découvrir la collection</button>
     </div>
   </section>
 
-  <!-- Section 2 : La Banquise (Froid) -->
+  <!-- SECTION 2 : FROID -->
   <section class="section section--cold">
     <div class="text-container text-container--right fade-text-cold">
       <p class="subtitle">02 — Zéro Absolu</p>
       <h1 class="title title__cold">L'INSTINCT<br>DU FROID</h1>
-      <p class="desc">Vision panoramique, traitement anti-buée.<br>Dominez les sommets.</p>
+      <p class="desc">Vision panoramique, traitement anti-buée. Dominez les sommets.</p>
+      <button class="btn btn--cold">Explorer le pôle</button>
     </div>
   </section>
 
-  <!-- Indicateur de scroll -->
-  <div class="scroll-hint">
-    <span>DÉFILER POUR CHANGER DE CLIMAT</span>
-    <div class="scroll-hint__bar"></div>
-  </div>
+  <!-- SECTION 3 : CARACTÉRISTIQUES (Pour remplir le site) -->
+  <section class="specs" id="tech">
+    <div class="specs__grid">
+      <div class="spec-card">
+        <h3>Verre Monobloc</h3>
+        <p>Une vision périphérique sans interruption. Traitement anti-rayures et anti-buée.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Titane Aérospatial</h3>
+        <p>Ultra-léger, ultra-résistant. Conçu pour ne jamais bouger, même dans la tempête.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Filtre Catégorie 4</h3>
+        <p>Protection maximale contre les UV extrêmes du désert et l'éblouissement de la neige.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="shop">
+    <div class="footer__content">
+      <h2>Prêt pour l'extrême ?</h2>
+      <p>Rejoignez la liste d'attente pour la prochaine collection ZÉNITH.</p>
+      <div class="footer__form">
+        <input type="email" placeholder="Votre adresse email" />
+        <button>Rejoindre</button>
+      </div>
+      <p class="footer__copy">© 2025 ZÉNITH. Tous droits réservés.</p>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
