@@ -18,36 +18,42 @@
   </header>
 
   <!-- =========================================
-       SCÈNES 1 & 2 : LA VIDÉO DE TRANSITION
+       SCÈNES 1 & 2 : LA VIDÉO
        ========================================= -->
   <section class="scene-video">
     <video id="video-1" class="bg-video" muted playsinline preload="auto">
       <source src="video-1.mp4" type="video/mp4" />
     </video>
 
+    <!-- Texte Chaud -->
     <div class="text-container fade-text-warm">
       <p class="subtitle">01 — Zone Aride</p>
-      <h1 class="title title__warm"><span>L'ÉCLAT</span><br><span>DU SOLEIL</span></h1>
+      <h1 class="title title__warm">L'ÉCLAT<br>DU SOLEIL</h1>
       <p class="desc">Verres polarisés, monture en titane.<br>Conçu pour dominer la fournaise.</p>
     </div>
 
+    <!-- Texte Froid (Caché au départ) -->
     <div class="text-container text-container--right fade-text-cold">
       <p class="subtitle">02 — Zéro Absolu</p>
-      <h1 class="title title__cold"><span>L'INSTINCT</span><br><span>DU FROID</span></h1>
+      <h1 class="title title__cold">L'INSTINCT<br>DU FROID</h1>
       <p class="desc">Vision panoramique, traitement anti-buée.<br>Dominez les sommets.</p>
     </div>
   </section>
 
   <!-- =========================================
-       SCÈNE 3 : L'ÉCRIN TECHNIQUE
+       SCÈNE 3 : L'ÉCRIN TECHNIQUE (Prêt pour la vidéo)
        ========================================= -->
   <section class="scene-tech">
     <div class="sticky-container">
       
-      <!-- La balise vidéo est prête. Elle affichera du noir tant que le fichier n'existe pas. -->
-      <video id="video-2" class="tech-media" muted playsinline preload="auto">
-        <source src="video-2.mp4" type="video/mp4" />
-      </video>
+      <!-- 
+        Le conteneur média. 
+        Demain, tu glisseras ta balise <video> ici à la place de la div.
+        Aujourd'hui, c'est une div noire.
+      -->
+      <div id="media-container" class="tech-media">
+        <!-- <video id="video-2" src="video-2.mp4" muted playsinline></video> -->
+      </div>
 
       <!-- Overlay : Lignes et Textes -->
       <div class="tech-overlay">
