@@ -44,7 +44,7 @@ body {
 
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
 
-/* C'EST ICI QUE CA CHANGE : On remet de la hauteur (200vh) */
+/* C'est ça qui permet de scroller (2 sections x 200vh = 400vh de page) */
 .section {
   height: 200vh; 
   position: relative;
