@@ -7,52 +7,44 @@ gsap.ticker.add((t) => { lenis.raf(t * 1000); });
 gsap.ticker.lagSmoothing(0);
 gsap.registerPlugin(ScrollTrigger);
 
-/* 2. Setup Vidéo et Textes */
-const video = document.getElementById('scroll-video');
+/* 2. Initialisation de la vidéo */
+const video = document.getElementById('tech-video');
 video.pause();
 
-// On cache le texte froid au départ
-gsap.set('.fade-text-cold', { opacity: 0 });
-gsap.set('.fade-text-cold .title span', { y: 100 }); // Poussé vers le bas pour l'effet masque
-gsap.set('.fade-text-cold .desc', { opacity: 0, y: 20 });
+/* 3. La Timeline de révélation (qui se déclenche à la fin de la vidéo) */
+const revealTimeline = gsap.timeline({ paused: true });
 
-let isTransitioning = false;
+revealTimeline
+  // Dessin des lignes rouges (Gauche)
+  .to('.line--warm', { strokeDashoffset: 0, duration: 1, stagger: 0.2 })
+  // Dessin des lignes bleues (Droite)
+  .to('.line--cold', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, "-=0.8")
+  // Apparition des textes
+  .to('.spec', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }, "-=0.5")
+  // Apparition du titre final
+  .to('.tech-title', { opacity: 1, duration: 1 }, "-=0.5");
 
-/* 3. Le Scroll déclenche la séquence (une seule fois) */
+/* 4. Le ScrollTrigger pour bloquer et lire */
 ScrollTrigger.create({
-  trigger: '.section--cold',
-  start: 'top 80%', // Se déclenche quand on approche de la section froide
+  trigger: '.scene-tech',
+  start: 'top top',
+  end: 'bottom bottom',
+  pin: '.sticky-container', // Bloque l'écran
+  pinSpacing: false,
   onEnter: () => {
-    if (isTransitioning) return;
-    isTransitioning = true;
-
-    // 1. On lance la vidéo (qui dure ~5s)
+    // Quand on arrive sur la section, on lance la vidéo
     video.play();
-
-    // 2. Le texte chaud s'efface immédiatement
-    gsap.to('.fade-text-warm', { opacity: 0, y: -30, duration: 0.8 });
-
-    // 3. On attend que la vidéo fasse sa transition (2.5s) pour afficher le texte froid
-    setTimeout(() => {
-      gsap.to('.fade-text-cold', { opacity: 1, duration: 0.1 });
-      gsap.to('.fade-text-cold .title span', { 
-        y: 0, 
-        duration: 1, 
-        ease: 'power4.out', 
-        stagger: 0.1 
-      });
-      gsap.to('.fade-text-cold .desc', { opacity: 1, y: 0, duration: 0.8, delay: 0.2 });
-    }, 2500); // 2.5 secondes de délai
   },
   onLeaveBack: () => {
-    // Si on remonte tout en haut, on reset tout
-    isTransitioning = false;
+    // Si on remonte, on reset tout
     video.pause();
     video.currentTime = 0;
-    
-    gsap.to('.fade-text-warm', { opacity: 1, y: 0, duration: 0.5 });
-    gsap.to('.fade-text-cold', { opacity: 0, duration: 0.3 });
-    gsap.set('.fade-text-cold .title span', { y: 100 });
-    gsap.set('.fade-text-cold .desc', { opacity: 0, y: 20 });
+    revealTimeline.reverse();
   }
+});
+
+/* 5. Événement à la fin de la vidéo */
+video.addEventListener('ended', () => {
+  // Quand la vidéo est finie (les produits sont révélés), on lance les lignes
+  revealTimeline.play();
 });
