@@ -21,19 +21,16 @@
        SCÈNES 1 & 2 : LA VIDÉO DE TRANSITION
        ========================================= -->
   <section class="scene-video">
-    <!-- Ta première vidéo -->
     <video id="video-1" class="bg-video" muted playsinline preload="auto">
       <source src="video-1.mp4" type="video/mp4" />
     </video>
 
-    <!-- Texte Chaud -->
     <div class="text-container fade-text-warm">
       <p class="subtitle">01 — Zone Aride</p>
       <h1 class="title title__warm"><span>L'ÉCLAT</span><br><span>DU SOLEIL</span></h1>
       <p class="desc">Verres polarisés, monture en titane.<br>Conçu pour dominer la fournaise.</p>
     </div>
 
-    <!-- Texte Froid -->
     <div class="text-container text-container--right fade-text-cold">
       <p class="subtitle">02 — Zéro Absolu</p>
       <h1 class="title title__cold"><span>L'INSTINCT</span><br><span>DU FROID</span></h1>
@@ -47,18 +44,10 @@
   <section class="scene-tech">
     <div class="sticky-container">
       
-      <!-- 
-        ⚠️ PRÉPARATION POUR DEMAIN ⚠️
-        Aujourd'hui, on utilise l'image (car ta vidéo est en 360p).
-        Demain, tu supprimeras la balise <img> ci-dessous et tu la remplaceras par :
-        
-        <video id="video-2" class="tech-media" muted playsinline preload="auto" autoplay loop>
-          <source src="video-2.mp4" type="video/mp4" />
-        </video>
-        
-        Et le code JS gérera automatiquement l'allumage.
-      -->
-      <img id="tech-media" src="image-tech.jpg" class="tech-media" alt="Produits Zénith" />
+      <!-- La balise vidéo est prête. Elle affichera du noir tant que le fichier n'existe pas. -->
+      <video id="video-2" class="tech-media" muted playsinline preload="auto">
+        <source src="video-2.mp4" type="video/mp4" />
+      </video>
 
       <!-- Overlay : Lignes et Textes -->
       <div class="tech-overlay">
@@ -93,7 +82,6 @@
     </div>
   </section>
 
-  <!-- Espace pour scroller après -->
   <div style="height: 100vh; background: #050505;"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
