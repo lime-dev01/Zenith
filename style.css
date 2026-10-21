@@ -19,22 +19,30 @@ body {
   overflow-x: hidden;
 }
 
-#webgl {
+/* --- Vidéo & Overlay --- */
+.bg-video {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
+  object-fit: cover;
   z-index: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.3); /* Assombrit très légèrement pour lire le texte */
+  z-index: 2;
   pointer-events: none;
 }
 
-/* --- UI --- */
+/* --- Header --- */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   padding: 2rem 4rem;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   z-index: 10;
   mix-blend-mode: difference;
 }
@@ -45,24 +53,30 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* --- Sections & Textes --- */
+/* --- Sections (Le Scroll) --- */
 .section {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 0 10vw;
+  height: 200vh; /* 2 écrans de scroll pour chaque section pour prendre le temps de voir la vidéo */
   position: relative;
-  z-index: 2;
+  z-index: 5;
   pointer-events: none;
 }
 
-.text-container { max-width: 600px; }
+/* On fixe les conteneurs de texte pour qu'ils restent centrés pendant qu'on scrolle */
+.text-container {
+  position: fixed;
+  top: 50%;
+  left: 10vw;
+  transform: translateY(-50%);
+  max-width: 600px;
+}
 
 .text-container--right {
-  margin-left: auto;
+  left: auto;
+  right: 10vw;
   text-align: right;
 }
 
+/* --- Typographie --- */
 .subtitle {
   font-size: 0.7rem;
   letter-spacing: 0.4em;
@@ -80,25 +94,15 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.title__warm {
-  color: #fff;
-  text-shadow: 0 0 40px rgba(255, 85, 0, 0.4);
-}
-
-.title__cold {
-  color: #fff;
-  text-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
-}
+.title__warm { color: #fff; text-shadow: 0 0 40px rgba(255, 85, 0, 0.5); }
+.title__cold { color: #fff; text-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
 
 .desc {
   font-size: 1rem;
   line-height: 1.6;
-  opacity: 0.6;
-  max-width: 350px;
+  opacity: 0.8;
   font-weight: 300;
 }
-
-.text-container--right .desc { margin-left: auto; }
 
 /* --- Scroll Hint --- */
 .scroll-hint {
@@ -112,14 +116,15 @@ body {
   align-items: center;
   gap: 1rem;
   font-size: 0.6rem;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.2em;
   font-weight: 600;
-  opacity: 0.4;
+  opacity: 0.5;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
 .scroll-hint__bar {
   width: 1px;
-  height: 50px;
+  height: 40px;
   background: white;
   position: relative;
   overflow: hidden;
