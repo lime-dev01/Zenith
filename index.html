@@ -15,30 +15,69 @@
 
   <header class="nav">
     <div class="nav__logo">ZÉNITH®</div>
+    <div class="nav__links">
+      <a href="#tech">Technologie</a>
+      <a href="#about">L'Univers</a>
+    </div>
   </header>
 
+  <!-- Vidéo de transition -->
   <video id="scroll-video" class="bg-video" muted playsinline preload="auto">
     <source src="video.mp4" type="video/mp4" />
   </video>
   <div class="overlay"></div>
 
-  <!-- Section 1 : CHAUD -->
+  <!-- SECTION 1 : CHAUD -->
   <section class="section section--warm">
     <div class="text-container fade-text-warm">
       <p class="subtitle">01 — Zone Aride</p>
-      <h1 class="title title__warm">L'ÉCLAT<br>DU SOLEIL</h1>
+      <h1 class="title title__warm"><span>L'ÉCLAT</span><br><span>DU SOLEIL</span></h1>
       <p class="desc">Verres polarisés, monture en titane.<br>Conçu pour dominer la fournaise.</p>
     </div>
   </section>
 
-  <!-- Section 2 : FROID -->
+  <!-- SECTION 2 : FROID -->
   <section class="section section--cold">
     <div class="text-container text-container--right fade-text-cold">
       <p class="subtitle">02 — Zéro Absolu</p>
-      <h1 class="title title__cold">L'INSTINCT<br>DU FROID</h1>
+      <h1 class="title title__cold"><span>L'INSTINCT</span><br><span>DU FROID</span></h1>
       <p class="desc">Vision panoramique, traitement anti-buée.<br>Dominez les sommets.</p>
     </div>
   </section>
+
+  <!-- SECTION 3 : TECH (Remplit le site) -->
+  <section class="specs" id="tech">
+    <div class="specs__header">
+      <h2>Conçu pour l'Enfer et la Glace.</h2>
+      <p>ZÉNITH ne fait aucun compromis sur la protection. Chaque matériau a été testé dans les conditions les plus extrêmes de la planète.</p>
+    </div>
+    <div class="specs__grid">
+      <div class="spec-card">
+        <h3>Verre Monobloc</h3>
+        <p>Une vision périphérique sans interruption. Traitement anti-rayures, anti-buée et filtre UV 400.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Titane Aérospatial</h3>
+        <p>Ultra-léger, ultra-résistant. La monture s'adapte à votre visage sans jamais exercer de pression.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Zéro Distorsion</h3>
+        <p>Une clarté optique parfaite. Que vous soyez ébloui par le sable ou par la neige, votre vision reste nette.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="about">
+    <div class="footer__content">
+      <h2>ZÉNITH®</h2>
+      <p>L'équipement des extrêmes. Conçu à Paris. Testé aux quatre coins du monde.</p>
+      <div class="footer__bottom">
+        <span>© 2025 ZÉNITH. Tous droits réservés.</span>
+        <span>Instagram / Contact</span>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
