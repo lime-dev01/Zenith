@@ -101,3 +101,15 @@ techTl.to('.line--warm', { strokeDashoffset: 0, duration: 1, stagger: 0.2 })
       .to('.line--cold', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, "-=0.8")
       .to('.spec', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }, "-=0.5")
       .to('.tech-title', { opacity: 1, duration: 1 }, "-=0.5");
+// =========================================
+// EFFACEMENT DE LA VIDÉO POUR LE FOOTER
+// =========================================
+gsap.to(['.tech-video', '.tech-overlay'], {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: '.footer',      // On cible le footer
+    start: 'top bottom',     // Dès que le footer commence à monter
+    end: 'top center',       // Jusqu'à ce qu'il soit à moitié à l'écran
+    scrub: true              // C'est le scroll qui contrôle l'effacement
+  }
+});
