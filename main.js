@@ -8,10 +8,10 @@ gsap.ticker.lagSmoothing(0);
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================================
-   SCÈNES 1 & 2 (Ton code actuel)
+   SCÈNES 1 & 2 (Vidéo 1)
    ========================================= */
-const video = document.getElementById('scroll-video');
-video.pause();
+const video1 = document.getElementById('video-1');
+video1.pause();
 
 gsap.set('.fade-text-cold', { opacity: 0 });
 gsap.set('.fade-text-cold .title span', { y: 100 });
@@ -26,7 +26,7 @@ ScrollTrigger.create({
     if (isTransitioning) return;
     isTransitioning = true;
 
-    video.play();
+    video1.play();
     gsap.to('.fade-text-warm', { opacity: 0, y: -30, duration: 0.8 });
 
     setTimeout(() => {
@@ -37,9 +37,8 @@ ScrollTrigger.create({
   },
   onLeaveBack: () => {
     isTransitioning = false;
-    video.pause();
-    video.currentTime = 0;
-    
+    video1.pause();
+    video1.currentTime = 0;
     gsap.to('.fade-text-warm', { opacity: 1, y: 0, duration: 0.5 });
     gsap.to('.fade-text-cold', { opacity: 0, duration: 0.3 });
     gsap.set('.fade-text-cold .title span', { y: 100 });
@@ -47,7 +46,7 @@ ScrollTrigger.create({
   }
 });
 
-// On cache le texte froid quand on arrive sur la Scène 3
+// Cache le texte froid quand on entre dans la Scène 3
 ScrollTrigger.create({
   trigger: '.scene-tech',
   start: 'top 50%',
@@ -56,37 +55,36 @@ ScrollTrigger.create({
 });
 
 /* =========================================
-   LA NOUVELLE SCÈNE 3 (Ajoutée ici)
+   SCÈNE 3 (Vidéo 2 - Stable)
    ========================================= */
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// On bloque l'écran et on lance la vidéo 2
+// On lance la vidéo 2 quand on arrive dessus
 ScrollTrigger.create({
   trigger: '.scene-tech',
-  start: 'top top',
-  end: 'bottom bottom',
-  pin: true, // L'écran reste figé pendant qu'on scrolle
+  start: 'top 50%', // Se déclenche quand la section est à moitié visible
   onEnter: () => {
+    console.log("Lecture vidéo 2");
     video2.play();
   },
   onLeaveBack: () => {
     video2.pause();
     video2.currentTime = 0;
-    // On reset les lignes et textes si on remonte
+    // Reset SVG
     gsap.set('.line', { strokeDashoffset: 50 });
     gsap.set('.spec', { opacity: 0, y: 10 });
     gsap.set('.tech-title', { opacity: 0 });
   }
 });
 
-// Timeline pour dessiner les lignes et afficher les textes (suit le scroll)
+// Animation SVG synchronisée avec le scroll (scrub)
 const techTl = gsap.timeline({
   scrollTrigger: {
     trigger: '.scene-tech',
     start: 'top top',
     end: 'bottom bottom',
-    scrub: 1,
+    scrub: 1, // Suit la molette
   }
 });
 
