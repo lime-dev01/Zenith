@@ -16,23 +16,39 @@ body {
 }
 
 /* =========================================
-   VIDÉO 1 (Fond)
+   LES VIDÉOS (Superposées et Fixes)
    ========================================= */
-.bg-video {
+.bg-video, .tech-video {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
-  object-fit: cover; z-index: 1;
+  object-fit: cover; 
+  pointer-events: none;
 }
 
+/* Vidéo 1 en dessous */
+.bg-video { z-index: 1; }
+
+/* Vidéo 2 au-dessus, invisible au départ */
+.tech-video { z-index: 2; opacity: 0; }
+
+/* Overlay sombre de la vidéo 1 */
 .overlay {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
   background: rgba(0, 0, 0, 0.25);
-  z-index: 2; pointer-events: none;
+  z-index: 3; pointer-events: none;
+}
+
+/* Overlay technique (Lignes et textes) au-dessus de tout */
+.tech-overlay {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 4; pointer-events: none;
+  opacity: 0; /* Invisible au départ */
 }
 
 /* =========================================
-   TYPOGRAPHIE & NAV
+   NAV & TYPOGRAPHIE
    ========================================= */
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
@@ -42,10 +58,20 @@ body {
 }
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
 .nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-left: 2rem; transition: opacity 0.3s; }
-.nav__links a:hover { opacity: 1; }
 
+/* =========================================
+   SECTIONS DE SCROLL (Réduites)
+   ========================================= */
 .section {
-  height: 250vh;
+  height: 100vh; /* Réduit drastiquement pour scroller plus vite */
+  position: relative;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* La section Tech */
+.scene-tech {
+  height: 150vh; /* Réduit pour que les lignes apparaissent vite */
   position: relative;
   z-index: 5;
   pointer-events: none;
@@ -66,49 +92,18 @@ body {
 .desc { font-size: 1.1rem; line-height: 1.6; opacity: 0.9; font-weight: 300; }
 
 /* =========================================
-   SCÈNE 3 : L'ÉCRIN TECHNIQUE
+   ÉLÉMENTS TECHNIQUES (Lignes et Specs)
    ========================================= */
-.scene-tech {
-  height: 300vh; /* Hauteur pour le scroll */
-  position: relative;
-  z-index: 6;
-}
-
-.sticky-container {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  background: #000;
-}
-
-.tech-video {
-  position: absolute; top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; z-index: 1;
-}
-
-/* Le conteneur des lignes et textes (caché au début) */
-.tech-overlay {
-  position: absolute; top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 2; pointer-events: none;
-  opacity: 0; /* GSAP va l'afficher */
-}
-
-/* Lignes SVG */
 .blueprint { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .line { 
   fill: none; 
   stroke-width: 0.2; 
   stroke-dasharray: 100; 
-  stroke-dashoffset: 100; /* Caché au début, GSAP va l'animer */
+  stroke-dashoffset: 100; 
 }
 .line--warm { stroke: var(--warm); filter: drop-shadow(0 0 6px var(--warm)); }
 .line--cold { stroke: var(--cold); filter: drop-shadow(0 0 6px var(--cold)); }
 
-/* Textes Techniques */
 .spec { position: absolute; opacity: 0; transform: translateY(10px); }
 .spec--warm { left: 5vw; top: 30%; text-align: left; }
 .spec--cold { right: 5vw; top: 30%; text-align: right; }
