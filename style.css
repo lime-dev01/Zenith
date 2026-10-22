@@ -121,15 +121,21 @@ body {
 .footer {
   position: relative; 
   z-index: 10; 
-  padding: 8rem 10vw 6rem; /* Un peu plus d'espace en haut */
+  padding: 8rem 10vw 6rem;
   
-  /* La magie opère ici : fond noir semi-transparent */
-  background: rgba(5, 5, 5, 0.75); 
+  /* Fond très transparent : on voit la vidéo à travers */
+  background: rgba(5, 5, 5, 0.35); 
   
-  /* L'effet "verre dépoli" qui floute la vidéo en dessous */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  /* L'effet flou (bonus, si le navigateur le supporte) */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   
-  /* Une fine ligne blanche transparente pour délimiter proprement */
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* On renforce l'ombre sur le texte pour qu'il reste lisible */
+.footer h2,
+.footer p,
+.footer__bottom {
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.6);
 }
