@@ -16,7 +16,7 @@ body {
 }
 
 /* =========================================
-   VIDÉO 1 (Fond Fixe)
+   VIDÉO 1 (Fond)
    ========================================= */
 .bg-video {
   position: fixed; top: 0; left: 0;
@@ -40,13 +40,12 @@ body {
   display: flex; justify-content: space-between;
   z-index: 100; mix-blend-mode: difference;
 }
-
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
 .nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-left: 2rem; transition: opacity 0.3s; }
 .nav__links a:hover { opacity: 1; }
 
 .section {
-  height: 250vh; /* Hauteur pour scroller sur la vidéo 1 */
+  height: 250vh;
   position: relative;
   z-index: 5;
   pointer-events: none;
@@ -57,7 +56,6 @@ body {
   transform: translateY(-50%);
   max-width: 600px; pointer-events: auto;
 }
-
 .text-container--right { left: auto; right: 10vw; text-align: right; }
 
 .subtitle { font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 1rem; font-weight: 600; opacity: 0.8; }
@@ -68,30 +66,47 @@ body {
 .desc { font-size: 1.1rem; line-height: 1.6; opacity: 0.9; font-weight: 300; }
 
 /* =========================================
-   SCÈNE 3 : VIDÉO 2 (Superposition)
+   SCÈNE 3 : L'ÉCRIN TECHNIQUE
    ========================================= */
-.tech-video {
-  position: fixed; top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  object-fit: cover;
-  z-index: 49; /* Au-dessus de tout */
-  opacity: 0; /* Invisible au départ */
-  pointer-events: none;
+.scene-tech {
+  height: 300vh; /* Hauteur pour le scroll */
+  position: relative;
+  z-index: 6;
 }
 
+.sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.tech-video {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; z-index: 1;
+}
+
+/* Le conteneur des lignes et textes (caché au début) */
 .tech-overlay {
-  position: fixed; top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  z-index: 50; /* Au-dessus de la vidéo 2 */
-  opacity: 0; /* Invisible au départ */
-  pointer-events: none;
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 2; pointer-events: none;
+  opacity: 0; /* GSAP va l'afficher */
 }
 
 /* Lignes SVG */
 .blueprint { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.line { fill: none; stroke-width: 0.15; stroke-dasharray: 50; stroke-dashoffset: 50; }
-.line--warm { stroke: var(--warm); filter: drop-shadow(0 0 8px var(--warm)); }
-.line--cold { stroke: var(--cold); filter: drop-shadow(0 0 8px var(--cold)); }
+.line { 
+  fill: none; 
+  stroke-width: 0.2; 
+  stroke-dasharray: 100; 
+  stroke-dashoffset: 100; /* Caché au début, GSAP va l'animer */
+}
+.line--warm { stroke: var(--warm); filter: drop-shadow(0 0 6px var(--warm)); }
+.line--cold { stroke: var(--cold); filter: drop-shadow(0 0 6px var(--cold)); }
 
 /* Textes Techniques */
 .spec { position: absolute; opacity: 0; transform: translateY(10px); }
@@ -106,14 +121,6 @@ body {
   position: absolute; bottom: 8vh; left: 50%; transform: translateX(-50%);
   font-family: var(--font-title); font-size: clamp(2rem, 5vw, 4rem);
   text-align: center; line-height: 0.9; opacity: 0; color: white;
-}
-
-/* La section qui permet de scroller pour la scène 3 */
-.scene-tech {
-  height: 300vh;
-  position: relative;
-  z-index: 4;
-  pointer-events: none;
 }
 
 /* =========================================
