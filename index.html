@@ -22,13 +22,54 @@
   </header>
 
   <!-- =========================================
-       VIDÉO 1 : Désert -> Banquise
+       VIDÉO 1 : Désert -> Banquise (Fixe)
        ========================================= -->
   <video id="video-1" class="bg-video" muted playsinline preload="auto">
     <source src="video.mp4" type="video/mp4" />
   </video>
   <div class="overlay"></div>
 
+  <!-- =========================================
+       VIDÉO 2 : La poussière et le studio (Fixe aussi)
+       ========================================= -->
+  <video id="video-2" class="tech-video" muted playsinline preload="auto">
+    <source src="video-2.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Overlay : Lignes SVG et Textes (Fixe aussi) -->
+  <div class="tech-overlay">
+    <svg class="blueprint" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path class="line line--warm" d="M 30 50 L 15 30" />
+      <path class="line line--warm" d="M 35 55 L 20 75" />
+      <path class="line line--cold" d="M 70 50 L 85 30" />
+      <path class="line line--cold" d="M 65 55 L 80 75" />
+    </svg>
+
+    <div class="specs">
+      <div class="spec spec--warm">
+        <h3>Titane Aérospatial</h3>
+        <p>Ultra-léger, ultra-résistant.</p>
+      </div>
+      <div class="spec spec--warm" style="top: 70%;">
+        <h3>Verre Monobloc</h3>
+        <p>Vision périphérique totale.</p>
+      </div>
+      <div class="spec spec--cold">
+        <h3>Zéro Distorsion</h3>
+        <p>Clarté optique absolue.</p>
+      </div>
+      <div class="spec spec--cold" style="top: 70%;">
+        <h3>Filtre Cat. 4</h3>
+        <p>Protection UV maximale.</p>
+      </div>
+    </div>
+
+    <h2 class="tech-title">L'Ingénierie<br>de l'Extrême.</h2>
+  </div>
+
+  <!-- =========================================
+       LES SECTIONS DE SCROLL (Juste pour scroller)
+       ========================================= -->
   <section class="section section--warm">
     <div class="text-container fade-text-warm">
       <p class="subtitle">01 — Zone Aride</p>
@@ -45,52 +86,7 @@
     </div>
   </section>
 
-  <!-- =========================================
-       SCÈNE 3 : L'ÉCRIN TECHNIQUE (Sticky CSS)
-       ========================================= -->
-  <section class="scene-tech" id="tech">
-    <div class="sticky-container">
-      
-      <!-- La Vidéo 2 (Poussière noire -> Studio) -->
-      <video id="video-2" class="tech-video" muted playsinline preload="auto">
-        <source src="video-2.mp4" type="video/mp4" />
-      </video>
-
-      <!-- Overlay : Lignes SVG et Textes -->
-      <div class="tech-overlay">
-        <!-- Lignes SVG -->
-        <svg class="blueprint" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path class="line line--warm" d="M 30 50 L 15 30" />
-          <path class="line line--warm" d="M 35 55 L 20 75" />
-          <path class="line line--cold" d="M 70 50 L 85 30" />
-          <path class="line line--cold" d="M 65 55 L 80 75" />
-        </svg>
-
-        <!-- Textes Techniques -->
-        <div class="specs">
-          <div class="spec spec--warm">
-            <h3>Titane Aérospatial</h3>
-            <p>Ultra-léger, ultra-résistant.</p>
-          </div>
-          <div class="spec spec--warm" style="top: 70%;">
-            <h3>Verre Monobloc</h3>
-            <p>Vision périphérique totale.</p>
-          </div>
-          <div class="spec spec--cold">
-            <h3>Zéro Distorsion</h3>
-            <p>Clarté optique absolue.</p>
-          </div>
-          <div class="spec spec--cold" style="top: 70%;">
-            <h3>Filtre Cat. 4</h3>
-            <p>Protection UV maximale.</p>
-          </div>
-        </div>
-
-        <!-- Titre -->
-        <h2 class="tech-title">L'Ingénierie<br>de l'Extrême.</h2>
-      </div>
-    </div>
-  </section>
+  <section class="scene-tech" id="tech"></section>
 
   <!-- FOOTER -->
   <footer class="footer" id="about">
