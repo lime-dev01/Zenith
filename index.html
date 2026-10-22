@@ -21,13 +21,15 @@
     </div>
   </header>
 
-  <!-- Vidéo de transition (Ta première vidéo) -->
-  <video id="scroll-video" class="bg-video" muted playsinline preload="auto">
+  <!-- =========================================
+       SCÈNES 1 & 2 : VIDÉO 1 (Désert -> Banquise)
+       ========================================= -->
+  <video id="video-1" class="bg-video" muted playsinline preload="auto">
     <source src="video.mp4" type="video/mp4" />
   </video>
   <div class="overlay"></div>
 
-  <!-- SECTION 1 : CHAUD -->
+  <!-- Section Chaud -->
   <section class="section section--warm">
     <div class="text-container fade-text-warm">
       <p class="subtitle">01 — Zone Aride</p>
@@ -36,7 +38,7 @@
     </div>
   </section>
 
-  <!-- SECTION 2 : FROID -->
+  <!-- Section Froid -->
   <section class="section section--cold">
     <div class="text-container text-container--right fade-text-cold">
       <p class="subtitle">02 — Zéro Absolu</p>
@@ -46,17 +48,17 @@
   </section>
 
   <!-- =========================================
-       LA NOUVELLE SECTION 3 (Ajoutée ici)
+       SCÈNE 3 : VIDÉO 2 (L'écrin technique)
        ========================================= -->
   <section class="scene-tech" id="tech">
     <div class="sticky-container">
       
-      <!-- Ta vidéo 2 (Poussière noire -> Studio) -->
+      <!-- Ta vidéo 2 -->
       <video id="video-2" class="tech-video" muted playsinline preload="auto">
         <source src="video-2.mp4" type="video/mp4" />
       </video>
 
-      <!-- Overlay : Lignes et Textes -->
+      <!-- Lignes et textes par-dessus -->
       <div class="tech-overlay">
         <svg class="blueprint" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path class="line line--warm" d="M 30 50 L 15 30" />
