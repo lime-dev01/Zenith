@@ -46,37 +46,31 @@ ScrollTrigger.create({
   }
 });
 
-// Cache le texte froid quand on entre dans la Scène 3
-ScrollTrigger.create({
-  trigger: '.scene-tech',
-  start: 'top 50%',
-  onEnter: () => gsap.to('.fade-text-cold', { opacity: 0, duration: 0.5 }),
-  onLeaveBack: () => gsap.to('.fade-text-cold', { opacity: 1, duration: 0.5 })
-});
-
 /* =========================================
    SCÈNE 3 (Vidéo 2 - Fondu invisible)
    ========================================= */
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// Quand on arrive sur la section, on lance la vidéo 2 et on fait le fondu par-dessus la vidéo 1
+// On déclenche le fondu quand on approche de la fin de la section froide
 ScrollTrigger.create({
-  trigger: '.scene-tech',
-  start: 'top 80%', // Se déclenche quand le scroll approche de la section
+  trigger: '.section--cold',
+  start: 'bottom 80%', // Se déclenche quand le bas de la section froide est à 80% de l'écran
   onEnter: () => {
     video2.play();
-    // Fondu de la vidéo 2 (opacité 0 -> 1)
     gsap.to('.tech-video', { opacity: 1, duration: 0.5, ease: 'power2.inOut' });
-    // Fondu de l'overlay technique
     gsap.to('.tech-overlay', { opacity: 1, duration: 0.5, ease: 'power2.inOut' });
+    
+    // On cache le texte froid
+    gsap.to('.fade-text-cold', { opacity: 0, duration: 0.5 });
   },
   onLeaveBack: () => {
-    // Reset si on remonte
     video2.pause();
     video2.currentTime = 0;
     gsap.to('.tech-video', { opacity: 0, duration: 0.3 });
     gsap.to('.tech-overlay', { opacity: 0, duration: 0.3 });
+    
+    gsap.to('.fade-text-cold', { opacity: 1, duration: 0.5 });
     
     gsap.set('.line', { strokeDashoffset: 50 });
     gsap.set('.spec', { opacity: 0, y: 10 });
