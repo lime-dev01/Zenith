@@ -8,7 +8,7 @@ gsap.ticker.lagSmoothing(0);
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================================
-   SCÈNES 1 & 2 (Vidéo 1)
+   VIDÉO 1 & TEXTE CHAUD
    ========================================= */
 const video1 = document.getElementById('video-1');
 video1.pause();
@@ -24,7 +24,6 @@ ScrollTrigger.create({
     video1.play();
     gsap.to('.fade-text-warm', { opacity: 0, y: -30, duration: 0.8 });
     
-    // On attend 2.5s pour afficher le texte froid (le temps que la vidéo transitionne)
     setTimeout(() => {
       gsap.to('.fade-text-cold', { opacity: 1, duration: 0.1 });
       gsap.to('.fade-text-cold .title span', { y: 0, duration: 1, ease: 'power4.out', stagger: 0.1 });
@@ -42,52 +41,62 @@ ScrollTrigger.create({
 });
 
 /* =========================================
-   SCÈNE 3 (Fondu de la vidéo 2)
+   SCÈNE 3 : LE FONDU SANS BUG
    ========================================= */
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// Déclenchement dès qu'on arrive sur la section Tech
+// 1. On lance la vidéo 2 quand la section approche
 ScrollTrigger.create({
   trigger: '.scene-tech',
-  start: 'top 80%', // Se déclenche très vite quand on scrolle vers la scène 3
-  onEnter: () => {
-    video2.play();
-    // La vidéo 2 recouvre la vidéo 1 en fondu (comme elle commence par la poussière noire, c'est invisible)
-    gsap.to('.tech-video', { opacity: 1, duration: 0.6, ease: 'power2.inOut' });
-    gsap.to('.tech-overlay', { opacity: 1, duration: 0.6, ease: 'power2.inOut' });
-    
-    // On cache le texte froid
-    gsap.to('.fade-text-cold', { opacity: 0, duration: 0.5 });
-  },
-  onLeaveBack: () => {
-    video2.pause();
-    video2.currentTime = 0;
-    gsap.to('.tech-video', { opacity: 0, duration: 0.3 });
-    gsap.to('.tech-overlay', { opacity: 0, duration: 0.3 });
-    gsap.to('.fade-text-cold', { opacity: 1, duration: 0.5 });
-    
-    // Reset SVG
-    gsap.set('.line', { strokeDashoffset: 100 });
-    gsap.set('.spec', { opacity: 0, y: 10 });
-    gsap.set('.tech-title', { opacity: 0 });
+  start: 'top bottom',
+  onEnter: () => video2.play(),
+  onLeaveBack: () => { video2.pause(); video2.currentTime = 0; }
+});
+
+// 2. L'opacité est STRICTEMENT liée au scroll (aucun onEnter/onLeaveBack ici)
+// Le fondu commence quand la section est en bas de l'écran, et finit quand elle est à 20% du haut.
+gsap.to('.tech-video', {
+  opacity: 1,
+  scrollTrigger: {
+    trigger: '.scene-tech',
+    start: 'top bottom',
+    end: 'top 20%',
+    scrub: 1
   }
 });
 
-/* =========================================
-   ANIMATION DES LIGNES SVG (Rapide au scroll)
-   ========================================= */
-// Hauteur de la section = 150vh. Le scrub commence dès le top et finit au bottom.
+gsap.to('.tech-overlay', {
+  opacity: 1,
+  scrollTrigger: {
+    trigger: '.scene-tech',
+    start: 'top bottom',
+    end: 'top 20%',
+    scrub: 1
+  }
+});
+
+// 3. Le texte froid s'efface
+gsap.to('.fade-text-cold', {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: '.scene-tech',
+    start: 'top bottom',
+    end: 'top 40%',
+    scrub: 1
+  }
+});
+
+// 4. Les lignes SVG se dessinent SEULEMENT quand la vidéo 2 est bien visible (top 20%)
 const techTl = gsap.timeline({
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: 1, 
+    start: 'top 20%', // Déclenche quand le fondu est terminé
+    end: 'bottom bottom', 
+    scrub: 1
   }
 });
 
-// Les lignes se dessinent en premier (pendant que la vidéo joue)
 techTl.to('.line--warm', { strokeDashoffset: 0, duration: 1, stagger: 0.2 })
       .to('.line--cold', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, "-=0.8")
       .to('.spec', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }, "-=0.5")
