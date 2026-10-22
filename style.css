@@ -45,9 +45,8 @@ body {
 .nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-left: 2rem; transition: opacity 0.3s; }
 .nav__links a:hover { opacity: 1; }
 
-/* Sections Vidéo 1 */
 .section {
-  height: 250vh;
+  height: 250vh; /* Hauteur pour scroller sur la vidéo 1 */
   position: relative;
   z-index: 5;
   pointer-events: none;
@@ -75,16 +74,17 @@ body {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
   object-fit: cover;
-  z-index: 2; 
-  opacity: 0; /* Invisible au départ, GSAP la fera apparaître */
+  z-index: 49; /* Au-dessus de tout */
+  opacity: 0; /* Invisible au départ */
   pointer-events: none;
 }
 
 .tech-overlay {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
-  z-index: 3; pointer-events: none;
-  opacity: 0; /* Invisible au départ, GSAP la fera apparaître */
+  z-index: 50; /* Au-dessus de la vidéo 2 */
+  opacity: 0; /* Invisible au départ */
+  pointer-events: none;
 }
 
 /* Lignes SVG */
@@ -108,7 +108,7 @@ body {
   text-align: center; line-height: 0.9; opacity: 0; color: white;
 }
 
-/* La section qui permet de scroller pour voir la scène 3 */
+/* La section qui permet de scroller pour la scène 3 */
 .scene-tech {
   height: 300vh;
   position: relative;
