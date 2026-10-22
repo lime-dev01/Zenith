@@ -55,36 +55,42 @@ ScrollTrigger.create({
 });
 
 /* =========================================
-   SCÈNE 3 (Vidéo 2 - Stable)
+   SCÈNE 3 (Vidéo 2 - Fondu invisible)
    ========================================= */
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// On lance la vidéo 2 quand on arrive dessus
+// Quand on arrive sur la section, on lance la vidéo 2 et on fait le fondu par-dessus la vidéo 1
 ScrollTrigger.create({
   trigger: '.scene-tech',
-  start: 'top 50%', // Se déclenche quand la section est à moitié visible
+  start: 'top 80%', // Se déclenche quand le scroll approche de la section
   onEnter: () => {
-    console.log("Lecture vidéo 2");
     video2.play();
+    // Fondu de la vidéo 2 (opacité 0 -> 1)
+    gsap.to('.tech-video', { opacity: 1, duration: 0.5, ease: 'power2.inOut' });
+    // Fondu de l'overlay technique
+    gsap.to('.tech-overlay', { opacity: 1, duration: 0.5, ease: 'power2.inOut' });
   },
   onLeaveBack: () => {
+    // Reset si on remonte
     video2.pause();
     video2.currentTime = 0;
-    // Reset SVG
+    gsap.to('.tech-video', { opacity: 0, duration: 0.3 });
+    gsap.to('.tech-overlay', { opacity: 0, duration: 0.3 });
+    
     gsap.set('.line', { strokeDashoffset: 50 });
     gsap.set('.spec', { opacity: 0, y: 10 });
     gsap.set('.tech-title', { opacity: 0 });
   }
 });
 
-// Animation SVG synchronisée avec le scroll (scrub)
+// Animation des lignes SVG (suit le scroll pendant la Scène 3)
 const techTl = gsap.timeline({
   scrollTrigger: {
     trigger: '.scene-tech',
     start: 'top top',
     end: 'bottom bottom',
-    scrub: 1, // Suit la molette
+    scrub: 1,
   }
 });
 
