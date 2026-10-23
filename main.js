@@ -46,16 +46,16 @@ ScrollTrigger.create({
   }
 });
 
-// Le texte froid disparaît BEAUCOUP PLUS TÔT (dès qu'on quitte la section froide)
+// Correction 2 : Le texte froid disparaît dès qu'on quitte la section (bottom 90%)
 ScrollTrigger.create({
   trigger: '.section--cold',
-  start: 'bottom 80%', // Déclenchement plus tôt
+  start: 'bottom 90%', 
   onEnter: () => gsap.to('.fade-text-cold', { opacity: 0, duration: 0.4 }),
   onLeaveBack: () => gsap.to('.fade-text-cold', { opacity: 1, duration: 0.4 })
 });
 
 /* =========================================
-   SCÈNE 3 (Vidéo 2 - Transition Adoucie)
+   SCÈNE 3 (Vidéo 2)
    ========================================= */
 const video2 = document.getElementById('video-2');
 video2.pause();
@@ -64,11 +64,9 @@ ScrollTrigger.create({
   trigger: '.scene-tech',
   start: 'top 80%',
   onEnter: () => {
-    // On force la fin de la vidéo 1
     video1.pause();
     video1.currentTime = video1.duration; 
     
-    // Transition douce (0.2s) pour éviter l'effet "glitch" sec
     gsap.to('.bg-video', { opacity: 0, duration: 0.2, onComplete: () => {
       gsap.set('.bg-video', { visibility: 'hidden' });
     }});
@@ -160,7 +158,6 @@ ScrollTrigger.create({
 });
 
 function switchMode() {
-  // Effet de glitch
   gsap.to('.hud-container', { x: 10, y: -10, duration: 0.05, repeat: 5, yoyo: true, onComplete: () => {
     gsap.set('.hud-container', { x: 0, y: 0 });
   }});
@@ -177,8 +174,9 @@ function switchMode() {
     altText.textContent = "120M";
     uvText.textContent = "MAX";
     
-    gsap.to(fillTemp, { width: '90%', duration: 0.5, backgroundColor: 'var(--warm)' });
-    gsap.to(fillAlt, { width: '20%', duration: 0.5, backgroundColor: 'var(--warm)' });
+    // Correction 3 : Couleurs en dur pour GSAP
+    gsap.to(fillTemp, { width: '90%', duration: 0.5, backgroundColor: '#ff5500' });
+    gsap.to(fillAlt, { width: '20%', duration: 0.5, backgroundColor: '#ff5500' });
     
     isColdMode = false;
   } else {
@@ -193,8 +191,9 @@ function switchMode() {
     altText.textContent = "3200M";
     uvText.textContent = "0%";
     
-    gsap.to(fillTemp, { width: '20%', duration: 0.5, backgroundColor: 'var(--cold)' });
-    gsap.to(fillAlt, { width: '80%', duration: 0.5, backgroundColor: 'var(--cold)' });
+    // Correction 3 : Couleurs en dur pour GSAP
+    gsap.to(fillTemp, { width: '20%', duration: 0.5, backgroundColor: '#00e5ff' });
+    gsap.to(fillAlt, { width: '80%', duration: 0.5, backgroundColor: '#00e5ff' });
     
     isColdMode = true;
   }
