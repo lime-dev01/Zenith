@@ -17,6 +17,9 @@ body {
   overflow-x: hidden;
 }
 
+/* =========================================
+   LES VIDÉOS
+   ========================================= */
 .bg-video, .tech-video, .action-video {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
@@ -38,7 +41,7 @@ body {
 }
 
 /* =========================================
-   SCÈNE 4 : L'ACTION (HUD Affiné)
+   SCÈNE 4 : L'ACTION (HUD)
    ========================================= */
 .action-video { z-index: 6; opacity: 0; }
 #video-sand { visibility: hidden; }
@@ -49,22 +52,12 @@ body {
   z-index: 7;
   pointer-events: none;
   opacity: 0;
-  color: rgba(255, 255, 255, 0.9); /* Blanc cassé élégant */
+  color: var(--hud-color); /* Sera animé par GSAP */
   font-family: var(--font-text);
-  font-weight: 300; /* Typo très fine */
+  font-weight: 300;
   letter-spacing: 0.1em;
   transition: color 0.3s ease;
   overflow: hidden;
-}
-
-.hud-grid {
-  position: absolute; inset: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
 }
 
 .hud-scanlines {
@@ -89,7 +82,7 @@ body {
 
 .corner {
   position: absolute; width: 15px; height: 15px;
-  border: 1px solid var(--hud-color);
+  border: 1px solid var(--hud-color); /* Animé par GSAP */
 }
 .tl { top: 0; left: 0; border-right: none; border-bottom: none; }
 .tr { top: 0; right: 0; border-left: none; border-bottom: none; }
@@ -104,8 +97,8 @@ body {
 
 .hud-data {
   position: absolute;
-  font-size: 0.65rem; /* Plus fin et petit */
-  letter-spacing: 0.2em; /* Plus aéré */
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
   line-height: 2.2;
   text-transform: uppercase;
   opacity: 0.8;
@@ -120,11 +113,10 @@ body {
 }
 .hud-data--tr .data-row { justify-content: flex-end; }
 
-/* Les valeurs en couleur */
+/* Le texte hérite de la couleur du parent animé par GSAP */
 .data-row span {
-  color: var(--hud-color);
+  color: inherit; 
   font-weight: 600;
-  transition: color 0.3s ease;
 }
 
 .data-bar {
@@ -141,7 +133,6 @@ body {
   box-shadow: 0 0 8px var(--hud-color);
 }
 
-/* Bouton Premium (Verre dépoli, coins légèrement arrondis) */
 .hud-btn {
   position: absolute; bottom: 15%; left: 50%;
   transform: translateX(-50%);
@@ -150,7 +141,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   color: var(--hud-color);
   border: 1px solid var(--hud-color);
-  border-radius: 4px; /* Coins très légèrement arrondis */
+  border-radius: 4px;
   padding: 1rem 2.5rem;
   font-family: var(--font-text);
   font-size: 0.75rem;
@@ -193,11 +184,13 @@ body {
 .nav__links a:hover::after { transform: scaleX(1); transform-origin: left; }
 
 /* =========================================
-   SECTIONS DE SCROLL
+   SECTIONS DE SCROLL (Hauteurs Réduites)
    ========================================= */
 .section { height: 100vh; position: relative; z-index: 5; pointer-events: none; }
-.scene-tech { height: 150vh; position: relative; z-index: 5; pointer-events: none; }
-.scene-action { height: 200vh; position: relative; z-index: 5; pointer-events: none; }
+/* Réduit de 150vh à 100vh */
+.scene-tech { height: 100vh; position: relative; z-index: 5; pointer-events: none; }
+/* Réduit de 200vh à 100vh */
+.scene-action { height: 100vh; position: relative; z-index: 5; pointer-events: none; }
 
 .text-container {
   position: fixed; top: 50%; left: 10vw;
