@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -22,7 +22,7 @@
   </header>
 
   <!-- =========================================
-       VIDÉO 1 : Désert -> Banquise (Fixe)
+       VIDÉO 1 : Désert -> Banquise
        ========================================= -->
   <video id="video-1" class="bg-video" muted playsinline preload="auto">
     <source src="video.mp4" type="video/mp4" />
@@ -30,13 +30,13 @@
   <div class="overlay"></div>
 
   <!-- =========================================
-       VIDÉO 2 : La poussière et le studio (Fixe aussi)
+       VIDÉO 2 : Le studio technique
        ========================================= -->
   <video id="video-2" class="tech-video" muted playsinline preload="auto">
     <source src="video-2.mp4" type="video/mp4" />
   </video>
 
-  <!-- Overlay : Lignes SVG et Textes (Fixe aussi) -->
+  <!-- Overlay : Lignes SVG et Textes -->
   <div class="tech-overlay">
     <svg class="blueprint" viewBox="0 0 100 100" preserveAspectRatio="none">
       <path class="line line--warm" d="M 30 50 L 15 30" />
@@ -68,7 +68,45 @@
   </div>
 
   <!-- =========================================
-       LES SECTIONS DE SCROLL (Juste pour scroller)
+       SCÈNE 4 : L'ACTION (HUD)
+       ========================================= -->
+  <video id="video-ski" class="action-video" muted playsinline preload="auto">
+    <source src="video-ski.mp4" type="video/mp4" />
+  </video>
+  <video id="video-sand" class="action-video" muted playsinline preload="auto">
+    <source src="video-sand.mp4" type="video/mp4" />
+  </video>
+
+  <div class="hud-container" id="hud">
+    <!-- Réticule central -->
+    <div class="hud-crosshair">
+      <div class="hud-circle"></div>
+      <div class="hud-lines"></div>
+    </div>
+
+    <!-- Données Haut Gauche -->
+    <div class="hud-data hud-data--tl">
+      <p>MODE: <span id="mode-text">POLAIRE</span></p>
+      <p>TEMP: <span id="temp-text">-24°C</span></p>
+      <p>ALT: <span id="alt-text">3200M</span></p>
+    </div>
+
+    <!-- Données Haut Droite -->
+    <div class="hud-data hud-data--tr">
+      <p>SYS: OK</p>
+      <p>UV: <span id="uv-text">0%</span></p>
+      <p>BAT: 98%</p>
+    </div>
+
+    <!-- Ligne de scan -->
+    <div class="hud-scanner"></div>
+
+    <!-- Bouton Switch -->
+    <button class="hud-btn" id="switch-btn">SWITCH MODE</button>
+  </div>
+
+  <!-- =========================================
+       SECTIONS DE SCROLL
        ========================================= -->
   <section class="section section--warm">
     <div class="text-container fade-text-warm">
@@ -87,6 +125,7 @@
   </section>
 
   <section class="scene-tech" id="tech"></section>
+  <section class="scene-action" id="action"></section>
 
   <!-- FOOTER -->
   <footer class="footer" id="about">
