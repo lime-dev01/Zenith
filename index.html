@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -36,7 +36,7 @@
     <source src="video-2.mp4" type="video/mp4" />
   </video>
 
-  <!-- Overlay : Lignes SVG et Textes (Amélioré) -->
+  <!-- Overlay : Lignes SVG et Textes (Corrigé) -->
   <div class="tech-overlay">
     <svg class="blueprint" viewBox="0 0 100 100" preserveAspectRatio="none">
       <path class="line line--warm" d="M 30 50 L 15 30" />
@@ -46,19 +46,22 @@
     </svg>
 
     <div class="specs">
-      <div class="spec-card spec--warm">
+      <!-- Côté Gauche (Warm) -->
+      <div class="spec-card spec-card--warm">
         <h3>Titane Aérospatial</h3>
         <p>Ultra-léger, ultra-résistant.</p>
       </div>
-      <div class="spec-card spec--warm" style="top: 70%;">
+      <div class="spec-card spec-card--warm" style="top: 70%;">
         <h3>Verre Monobloc</h3>
         <p>Vision périphérique totale.</p>
       </div>
-      <div class="spec-card spec--cold">
+      
+      <!-- Côté Droit (Cold) -->
+      <div class="spec-card spec-card--cold">
         <h3>Zéro Distorsion</h3>
         <p>Clarté optique absolue.</p>
       </div>
-      <div class="spec-card spec--cold" style="top: 70%;">
+      <div class="spec-card spec-card--cold" style="top: 70%;">
         <h3>Filtre Cat. 4</h3>
         <p>Protection UV maximale.</p>
       </div>
@@ -68,7 +71,7 @@
   </div>
 
   <!-- =========================================
-       SCÈNE 4 : L'ACTION (HUD Amélioré)
+       SCÈNE 4 : L'ACTION (HUD Élégant)
        ========================================= -->
   <video id="video-ski" class="action-video" muted playsinline preload="auto">
     <source src="video-ski.mp4" type="video/mp4" />
@@ -79,12 +82,10 @@
 
   <div class="hud-container" id="hud">
     
-    <!-- Grille radar en fond -->
     <div class="hud-grid"></div>
-    <!-- Effet Scanline -->
     <div class="hud-scanlines"></div>
 
-    <!-- Réticule central (Crochets) -->
+    <!-- Réticule central -->
     <div class="hud-crosshair">
       <div class="corner tl"></div>
       <div class="corner tr"></div>
