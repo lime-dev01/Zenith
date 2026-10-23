@@ -46,10 +46,10 @@ ScrollTrigger.create({
   }
 });
 
-// Correction 2 : Le texte froid disparaît dès qu'on quitte la section (bottom 90%)
+// Texte froid qui disparaît dès qu'on quitte la section (start plus tôt)
 ScrollTrigger.create({
   trigger: '.section--cold',
-  start: 'bottom 90%', 
+  start: 'bottom 70%', 
   onEnter: () => gsap.to('.fade-text-cold', { opacity: 0, duration: 0.4 }),
   onLeaveBack: () => gsap.to('.fade-text-cold', { opacity: 1, duration: 0.4 })
 });
@@ -87,7 +87,7 @@ ScrollTrigger.create({
 const techTl = gsap.timeline({
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top 40%',
+    start: 'top 50%', // Déclenchement plus tôt
     end: 'bottom bottom',
     scrub: 1
   }
@@ -141,7 +141,7 @@ ScrollTrigger.create({
     videoSki.play();
     
     gsap.to('.hud-container', { opacity: 1, duration: 0.5 });
-    gsap.to('.hud-container', { color: 'var(--cold)', duration: 0.5 });
+    gsap.to('.hud-container', { color: '#00e5ff', duration: 0.5 });
   },
   onLeaveBack: () => {
     videoSki.pause();
@@ -167,16 +167,20 @@ function switchMode() {
     gsap.set('#video-sand', { visibility: 'visible', opacity: 1 });
     videoSand.play();
     
-    gsap.to('.hud-container', { color: 'var(--warm)', duration: 0.3 });
+    // Animations couleurs en dur (Hex) pour éviter le bug du bleu
+    gsap.to('.hud-container', { color: '#ff5500', duration: 0.3 });
+    gsap.to('.corner', { borderColor: '#ff5500', duration: 0.3 });
+    gsap.to('.center-dot', { backgroundColor: '#ff5500', duration: 0.3 });
+    gsap.to('.hud-btn', { color: '#ff5500', borderColor: '#ff5500', duration: 0.3 });
+    gsap.to('.data-row span', { color: '#ff5500', duration: 0.3 });
     
     modeText.textContent = "DÉSERT";
     tempText.textContent = "48°C";
     altText.textContent = "120M";
     uvText.textContent = "MAX";
     
-    // Correction 3 : Couleurs en dur pour GSAP
-    gsap.to(fillTemp, { width: '90%', duration: 0.5, backgroundColor: '#ff5500' });
-    gsap.to(fillAlt, { width: '20%', duration: 0.5, backgroundColor: '#ff5500' });
+    gsap.to(fillTemp, { width: '90%', duration: 0.5, backgroundColor: '#ff5500', boxShadow: '0 0 8px #ff5500' });
+    gsap.to(fillAlt, { width: '20%', duration: 0.5, backgroundColor: '#ff5500', boxShadow: '0 0 8px #ff5500' });
     
     isColdMode = false;
   } else {
@@ -184,16 +188,20 @@ function switchMode() {
     gsap.set('#video-ski', { visibility: 'visible', opacity: 1 });
     videoSki.play();
     
-    gsap.to('.hud-container', { color: 'var(--cold)', duration: 0.3 });
+    // Animations couleurs en dur (Hex)
+    gsap.to('.hud-container', { color: '#00e5ff', duration: 0.3 });
+    gsap.to('.corner', { borderColor: '#00e5ff', duration: 0.3 });
+    gsap.to('.center-dot', { backgroundColor: '#00e5ff', duration: 0.3 });
+    gsap.to('.hud-btn', { color: '#00e5ff', borderColor: '#00e5ff', duration: 0.3 });
+    gsap.to('.data-row span', { color: '#00e5ff', duration: 0.3 });
     
     modeText.textContent = "POLAIRE";
     tempText.textContent = "-24°C";
     altText.textContent = "3200M";
     uvText.textContent = "0%";
     
-    // Correction 3 : Couleurs en dur pour GSAP
-    gsap.to(fillTemp, { width: '20%', duration: 0.5, backgroundColor: '#00e5ff' });
-    gsap.to(fillAlt, { width: '80%', duration: 0.5, backgroundColor: '#00e5ff' });
+    gsap.to(fillTemp, { width: '20%', duration: 0.5, backgroundColor: '#00e5ff', boxShadow: '0 0 8px #00e5ff' });
+    gsap.to(fillAlt, { width: '80%', duration: 0.5, backgroundColor: '#00e5ff', boxShadow: '0 0 8px #00e5ff' });
     
     isColdMode = true;
   }
