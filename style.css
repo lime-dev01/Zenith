@@ -17,36 +17,28 @@ body {
   overflow-x: hidden;
 }
 
-/* =========================================
-   LES VIDÉOS
-   ========================================= */
 .bg-video, .tech-video, .action-video {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
-  object-fit: cover; 
-  pointer-events: none;
+  object-fit: cover; pointer-events: none;
 }
 
 .bg-video { z-index: 1; }
-
 .overlay {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
   background: rgba(0, 0, 0, 0.25);
   z-index: 2; pointer-events: none;
 }
-
-.tech-video { z-index: 3; opacity: 0; transition: opacity 0.3s ease; }
-
+.tech-video { z-index: 3; opacity: 0; }
 .tech-overlay {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
-  z-index: 4; pointer-events: none;
-  opacity: 0;
+  z-index: 4; pointer-events: none; opacity: 0;
 }
 
 /* =========================================
-   SCÈNE 4 : L'ACTION (HUD Élégant)
+   SCÈNE 4 : L'ACTION (HUD Affiné)
    ========================================= */
 .action-video { z-index: 6; opacity: 0; }
 #video-sand { visibility: hidden; }
@@ -57,14 +49,14 @@ body {
   z-index: 7;
   pointer-events: none;
   opacity: 0;
-  color: rgba(255, 255, 255, 0.85); /* Blanc cassé au lieu du cyan fluo */
-  font-family: var(--font-text); /* Space Grotesk au lieu du monospace */
-  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9); /* Blanc cassé élégant */
+  font-family: var(--font-text);
+  font-weight: 300; /* Typo très fine */
+  letter-spacing: 0.1em;
   transition: color 0.3s ease;
   overflow: hidden;
 }
 
-/* Grille radar */
 .hud-grid {
   position: absolute; inset: 0;
   background-image: 
@@ -75,16 +67,13 @@ body {
   -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
 }
 
-/* Effet Scanline */
 .hud-scanlines {
   position: absolute; inset: 0;
   background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15));
   background-size: 100% 4px;
-  pointer-events: none;
-  opacity: 0.3;
+  pointer-events: none; opacity: 0.3;
 }
 
-/* Réticule central (Crochets) */
 .hud-crosshair {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -100,7 +89,7 @@ body {
 
 .corner {
   position: absolute; width: 15px; height: 15px;
-  border: 1px solid var(--hud-color); /* Couleur uniquement sur le réticule */
+  border: 1px solid var(--hud-color);
 }
 .tl { top: 0; left: 0; border-right: none; border-bottom: none; }
 .tr { top: 0; right: 0; border-left: none; border-bottom: none; }
@@ -113,66 +102,64 @@ body {
   border-radius: 50%; transform: translate(-50%, -50%);
 }
 
-/* Données HUD */
 .hud-data {
   position: absolute;
-  font-size: 0.75rem; /* Plus petit, plus fin */
-  letter-spacing: 0.15em;
-  line-height: 2;
+  font-size: 0.65rem; /* Plus fin et petit */
+  letter-spacing: 0.2em; /* Plus aéré */
+  line-height: 2.2;
   text-transform: uppercase;
+  opacity: 0.8;
 }
 .hud-data--tl { top: 15%; left: 5%; }
 .hud-data--tr { top: 15%; right: 5%; text-align: right; }
 
 .data-row {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
-  gap: 1rem;
+  margin-bottom: 0.5rem; gap: 1rem;
 }
 .hud-data--tr .data-row { justify-content: flex-end; }
 
-/* On met les valeurs dynamiques en couleur */
+/* Les valeurs en couleur */
 .data-row span {
   color: var(--hud-color);
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
-/* Barres de données */
 .data-bar {
-  width: 80px; height: 2px; /* Plus fin */
-  background: rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
+  width: 80px; height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  position: relative; overflow: hidden;
 }
 .hud-data--tr .data-bar { display: none; }
 
 .fill {
   position: absolute; top: 0; left: 0; height: 100%;
   background: var(--hud-color);
-  transition: width 0.5s ease, background 0.3s ease;
+  transition: width 0.5s ease, background-color 0.3s ease;
   box-shadow: 0 0 8px var(--hud-color);
 }
 
-/* Bouton Carré Militaire */
+/* Bouton Premium (Verre dépoli, coins légèrement arrondis) */
 .hud-btn {
   position: absolute; bottom: 15%; left: 50%;
   transform: translateX(-50%);
-  background: transparent;
+  background: rgba(5, 5, 5, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--hud-color);
   border: 1px solid var(--hud-color);
+  border-radius: 4px; /* Coins très légèrement arrondis */
   padding: 1rem 2.5rem;
-  font-family: var(--font-text); /* Typo propre */
-  font-size: 0.8rem;
+  font-family: var(--font-text);
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
   pointer-events: auto;
   transition: all 0.3s ease;
-  border-radius: 0; /* Coins carrés ! */
 }
 .hud-btn:hover {
   background: var(--hud-color);
@@ -189,9 +176,7 @@ body {
   display: flex; justify-content: space-between; align-items: center;
   z-index: 100; mix-blend-mode: difference;
 }
-
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
-
 .nav__links { display: flex; gap: 2.5rem; align-items: center; }
 .nav__links a {
   color: white; text-decoration: none;
@@ -229,30 +214,19 @@ body {
 .desc { font-size: 1.1rem; line-height: 1.6; opacity: 0.9; font-weight: 300; }
 
 /* =========================================
-   ÉLÉMENTS TECHNIQUES (SCÈNE 3 Corrigée)
+   ÉLÉMENTS TECHNIQUES (SCÈNE 3)
    ========================================= */
 .blueprint { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.line { 
-  fill: none; 
-  stroke-width: 0.15; 
-  stroke-dasharray: 100; 
-  stroke-dashoffset: 100; 
-}
+.line { fill: none; stroke-width: 0.15; stroke-dasharray: 100; stroke-dashoffset: 100; }
 .line--warm { stroke: var(--warm); filter: drop-shadow(0 0 4px var(--warm)); }
 .line--cold { stroke: var(--cold); filter: drop-shadow(0 0 4px var(--cold)); }
 
-/* Cartes en verre dépoli */
 .spec-card { 
-  position: absolute; 
-  opacity: 0; 
-  transform: translateY(10px);
+  position: absolute; opacity: 0; transform: translateY(10px);
   background: rgba(10, 10, 10, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
-  border-radius: 4px;
-  min-width: 250px;
+  padding: 1.5rem; border-radius: 4px; min-width: 250px;
 }
 .spec-card--warm { left: 5vw; top: 30%; text-align: left; border-left: 2px solid var(--warm); }
 .spec-card--cold { right: 5vw; top: 30%; text-align: right; border-right: 2px solid var(--cold); }
@@ -274,15 +248,12 @@ body {
 .footer {
   position: relative; z-index: 10; padding: 8rem 10vw 4rem;
   background: rgba(5, 5, 5, 0.15); 
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .footer h2, .footer p, .footer__bottom {
   text-shadow: 0 4px 30px rgba(0, 0, 0, 1), 0 0 15px rgba(0, 0, 0, 0.9);
 }
-
 .footer__content { max-width: 800px; margin: 0 auto; text-align: center; }
 .footer h2 { font-family: var(--font-title); font-size: 4rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
 .footer p { opacity: 0.9; margin-bottom: 4rem; }
