@@ -36,7 +36,7 @@
     <source src="video-2.mp4" type="video/mp4" />
   </video>
 
-  <!-- Overlay : Lignes SVG et Textes -->
+  <!-- Overlay : Lignes SVG et Textes (Amélioré) -->
   <div class="tech-overlay">
     <svg class="blueprint" viewBox="0 0 100 100" preserveAspectRatio="none">
       <path class="line line--warm" d="M 30 50 L 15 30" />
@@ -46,19 +46,19 @@
     </svg>
 
     <div class="specs">
-      <div class="spec spec--warm">
+      <div class="spec-card spec--warm">
         <h3>Titane Aérospatial</h3>
         <p>Ultra-léger, ultra-résistant.</p>
       </div>
-      <div class="spec spec--warm" style="top: 70%;">
+      <div class="spec-card spec--warm" style="top: 70%;">
         <h3>Verre Monobloc</h3>
         <p>Vision périphérique totale.</p>
       </div>
-      <div class="spec spec--cold">
+      <div class="spec-card spec--cold">
         <h3>Zéro Distorsion</h3>
         <p>Clarté optique absolue.</p>
       </div>
-      <div class="spec spec--cold" style="top: 70%;">
+      <div class="spec-card spec--cold" style="top: 70%;">
         <h3>Filtre Cat. 4</h3>
         <p>Protection UV maximale.</p>
       </div>
@@ -68,7 +68,7 @@
   </div>
 
   <!-- =========================================
-       SCÈNE 4 : L'ACTION (HUD)
+       SCÈNE 4 : L'ACTION (HUD Amélioré)
        ========================================= -->
   <video id="video-ski" class="action-video" muted playsinline preload="auto">
     <source src="video-ski.mp4" type="video/mp4" />
@@ -78,28 +78,43 @@
   </video>
 
   <div class="hud-container" id="hud">
-    <!-- Réticule central -->
+    
+    <!-- Grille radar en fond -->
+    <div class="hud-grid"></div>
+    <!-- Effet Scanline -->
+    <div class="hud-scanlines"></div>
+
+    <!-- Réticule central (Crochets) -->
     <div class="hud-crosshair">
-      <div class="hud-circle"></div>
-      <div class="hud-lines"></div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <div class="center-dot"></div>
     </div>
 
     <!-- Données Haut Gauche -->
     <div class="hud-data hud-data--tl">
-      <p>MODE: <span id="mode-text">POLAIRE</span></p>
-      <p>TEMP: <span id="temp-text">-24°C</span></p>
-      <p>ALT: <span id="alt-text">3200M</span></p>
+      <div class="data-row">MODE: <span id="mode-text">POLAIRE</span></div>
+      <div class="data-row">
+        TEMP: <span id="temp-text">-24°C</span>
+        <div class="data-bar"><div class="fill" id="fill-temp" style="width: 20%;"></div></div>
+      </div>
+      <div class="data-row">
+        ALT: <span id="alt-text">3200M</span>
+        <div class="data-bar"><div class="fill" id="fill-alt" style="width: 80%;"></div></div>
+      </div>
     </div>
 
     <!-- Données Haut Droite -->
     <div class="hud-data hud-data--tr">
-      <p>SYS: OK</p>
-      <p>UV: <span id="uv-text">0%</span></p>
-      <p>BAT: 98%</p>
+      <div class="data-row">SYS: <span style="color:#00ff00;">OK</span></div>
+      <div class="data-row">UV: <span id="uv-text">0%</span></div>
+      <div class="data-row">
+        BAT: 98%
+        <div class="data-bar"><div class="fill" style="width: 98%;"></div></div>
+      </div>
     </div>
-
-    <!-- Ligne de scan -->
-    <div class="hud-scanner"></div>
 
     <!-- Bouton Switch -->
     <button class="hud-btn" id="switch-btn">SWITCH MODE</button>
