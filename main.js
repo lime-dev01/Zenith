@@ -46,16 +46,16 @@ ScrollTrigger.create({
   }
 });
 
-// Le texte froid disparaît plus tôt (quand on quitte la section froide)
+// Le texte froid disparaît BEAUCOUP PLUS TÔT (dès qu'on quitte la section froide)
 ScrollTrigger.create({
   trigger: '.section--cold',
-  start: 'bottom 60%',
+  start: 'bottom 80%', // Déclenchement plus tôt
   onEnter: () => gsap.to('.fade-text-cold', { opacity: 0, duration: 0.4 }),
   onLeaveBack: () => gsap.to('.fade-text-cold', { opacity: 1, duration: 0.4 })
 });
 
 /* =========================================
-   SCÈNE 3 (Vidéo 2)
+   SCÈNE 3 (Vidéo 2 - Transition Adoucie)
    ========================================= */
 const video2 = document.getElementById('video-2');
 video2.pause();
@@ -64,11 +64,18 @@ ScrollTrigger.create({
   trigger: '.scene-tech',
   start: 'top 80%',
   onEnter: () => {
+    // On force la fin de la vidéo 1
     video1.pause();
     video1.currentTime = video1.duration; 
-    gsap.set('.bg-video', { opacity: 0, visibility: 'hidden' });
-    gsap.set('.tech-video', { opacity: 1, visibility: 'visible' });
-    video2.play();
+    
+    // Transition douce (0.2s) pour éviter l'effet "glitch" sec
+    gsap.to('.bg-video', { opacity: 0, duration: 0.2, onComplete: () => {
+      gsap.set('.bg-video', { visibility: 'hidden' });
+    }});
+    
+    gsap.to('.tech-video', { opacity: 1, duration: 0.2, onComplete: () => {
+      video2.play();
+    }});
   },
   onLeaveBack: () => {
     gsap.set('.bg-video', { opacity: 1, visibility: 'visible' });
@@ -115,7 +122,6 @@ const tempText = document.getElementById('temp-text');
 const altText = document.getElementById('alt-text');
 const uvText = document.getElementById('uv-text');
 
-// Les barres de données
 const fillTemp = document.getElementById('fill-temp');
 const fillAlt = document.getElementById('fill-alt');
 
@@ -154,12 +160,11 @@ ScrollTrigger.create({
 });
 
 function switchMode() {
-  // 1. Glitch effect
+  // Effet de glitch
   gsap.to('.hud-container', { x: 10, y: -10, duration: 0.05, repeat: 5, yoyo: true, onComplete: () => {
     gsap.set('.hud-container', { x: 0, y: 0 });
   }});
 
-  // 2. Switch
   if (isColdMode) {
     gsap.set('#video-ski', { visibility: 'hidden' });
     gsap.set('#video-sand', { visibility: 'visible', opacity: 1 });
@@ -172,9 +177,8 @@ function switchMode() {
     altText.textContent = "120M";
     uvText.textContent = "MAX";
     
-    // Animation des barres
-    gsap.to(fillTemp, { width: '90%', duration: 0.5 });
-    gsap.to(fillAlt, { width: '20%', duration: 0.5 });
+    gsap.to(fillTemp, { width: '90%', duration: 0.5, backgroundColor: 'var(--warm)' });
+    gsap.to(fillAlt, { width: '20%', duration: 0.5, backgroundColor: 'var(--warm)' });
     
     isColdMode = false;
   } else {
@@ -189,9 +193,8 @@ function switchMode() {
     altText.textContent = "3200M";
     uvText.textContent = "0%";
     
-    // Animation des barres
-    gsap.to(fillTemp, { width: '20%', duration: 0.5 });
-    gsap.to(fillAlt, { width: '80%', duration: 0.5 });
+    gsap.to(fillTemp, { width: '20%', duration: 0.5, backgroundColor: 'var(--cold)' });
+    gsap.to(fillAlt, { width: '80%', duration: 0.5, backgroundColor: 'var(--cold)' });
     
     isColdMode = true;
   }
