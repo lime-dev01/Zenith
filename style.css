@@ -4,6 +4,9 @@
   --dark: #050505;
   --font-title: 'Archivo Black', sans-serif;
   --font-text: 'Space Grotesk', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  
+  --hud-color: var(--cold);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,7 +21,7 @@ body {
 /* =========================================
    LES VIDÉOS
    ========================================= */
-.bg-video, .tech-video {
+.bg-video, .tech-video, .action-video {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
   object-fit: cover; 
@@ -44,6 +47,95 @@ body {
 }
 
 /* =========================================
+   SCÈNE 4 : L'ACTION
+   ========================================= */
+.action-video {
+  z-index: 6;
+  opacity: 0;
+}
+
+#video-sand { visibility: hidden; }
+
+.hud-container {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 7;
+  pointer-events: none;
+  opacity: 0;
+  color: var(--hud-color);
+  font-family: var(--font-mono);
+  transition: color 0.3s ease;
+  overflow: hidden;
+}
+
+.hud-crosshair {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px; height: 200px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.hud-circle {
+  width: 100px; height: 100px;
+  border: 1px solid var(--hud-color);
+  border-radius: 50%;
+  position: relative;
+}
+.hud-circle::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  width: 4px; height: 4px; background: var(--hud-color);
+  transform: translate(-50%, -50%); border-radius: 50%;
+}
+
+.hud-lines {
+  position: absolute; width: 100%; height: 100%;
+  border-top: 1px solid var(--hud-color);
+  border-bottom: 1px solid var(--hud-color);
+  clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%, 0 80%, 100% 80%, 100% 81%, 0 81%);
+}
+
+.hud-data {
+  position: absolute;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+.hud-data--tl { top: 20%; left: 5%; }
+.hud-data--tr { top: 20%; right: 5%; text-align: right; }
+
+.hud-scanner {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--hud-color);
+  opacity: 0.4;
+  box-shadow: 0 0 15px var(--hud-color);
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.hud-btn {
+  position: absolute; bottom: 20%; left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  color: var(--hud-color);
+  border: 1px solid var(--hud-color);
+  padding: 1rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+.hud-btn:hover {
+  background: var(--hud-color);
+  color: var(--dark);
+}
+
+/* =========================================
    NAV & TYPOGRAPHIE
    ========================================= */
 .nav {
@@ -55,52 +147,27 @@ body {
 
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
 
-/* =========================================
-   BOUTONS NAVIGATION (Le redesign)
-   ========================================= */
-.nav__links {
-  display: flex;
-  gap: 2.5rem;
-  align-items: center;
-}
-
+.nav__links { display: flex; gap: 2.5rem; align-items: center; }
 .nav__links a {
-  color: white;
-  text-decoration: none;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-  position: relative;
-  padding: 0.5rem 0;
-  transition: color 0.3s ease;
+  color: white; text-decoration: none;
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 600;
+  position: relative; padding: 0.5rem 0; transition: color 0.3s ease;
 }
-
-/* L'effet de ligne qui se dessine au survol */
 .nav__links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--cold);
-  transform: scaleX(0);
-  transform-origin: right;
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 1px; background: var(--cold);
+  transform: scaleX(0); transform-origin: right;
   transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
 }
-
 .nav__links a:hover { color: var(--cold); }
-.nav__links a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
+.nav__links a:hover::after { transform: scaleX(1); transform-origin: left; }
 
 /* =========================================
    SECTIONS DE SCROLL
    ========================================= */
 .section { height: 100vh; position: relative; z-index: 5; pointer-events: none; }
 .scene-tech { height: 150vh; position: relative; z-index: 5; pointer-events: none; }
+.scene-action { height: 200vh; position: relative; z-index: 5; pointer-events: none; }
 
 .text-container {
   position: fixed; top: 50%; left: 10vw;
@@ -145,21 +212,13 @@ body {
   position: relative; 
   z-index: 10; 
   padding: 8rem 10vw 4rem;
-  
-  /* Très légèrement teinté pour que le flou fonctionne, mais quasi transparent */
   background: rgba(5, 5, 5, 0.15); 
-  
-  /* Le flou qui donne l'effet "verre dépoli" */
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Ombre très forte sur le texte pour qu'il soit lisible sur la vidéo */
-.footer h2,
-.footer p,
-.footer__bottom {
+.footer h2, .footer p, .footer__bottom {
   text-shadow: 0 4px 30px rgba(0, 0, 0, 1), 0 0 15px rgba(0, 0, 0, 0.9);
 }
 
