@@ -31,7 +31,6 @@ ScrollTrigger.create({
     }, 2000);
   },
   onLeaveBack: () => {
-    // Reset complet si on remonte
     video1.pause();
     video1.currentTime = 0;
     gsap.to('.fade-text-warm', { opacity: 1, y: 0, duration: 0.5 });
@@ -39,7 +38,7 @@ ScrollTrigger.create({
     gsap.set('.fade-text-cold .title span', { y: 100 });
     gsap.set('.fade-text-cold .desc', { opacity: 0, y: 20 });
     
-    // On remet la vidéo 1 et on cache la vidéo 2
+    // Reset vidéos
     gsap.set('.bg-video', { opacity: 1, visibility: 'visible' });
     gsap.set('.tech-video', { opacity: 0, visibility: 'hidden' });
     gsap.set('.tech-overlay', { opacity: 0 });
@@ -49,26 +48,50 @@ ScrollTrigger.create({
 });
 
 /* =========================================
-   SCÈNE 3 : LE SWITCH INSTANTANÉ
+   SCÈNE 3 : LE SWITCH AU SCROLL
    ========================================= */
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// 1. LE MOMENT CLÉ : Quand la vidéo 1 se termine
-video1.addEventListener('ended', () => {
-  // On cache la vidéo 1 INSTANTANÉMENT
-  gsap.set('.bg-video', { opacity: 0, visibility: 'hidden' });
-  // On montre la vidéo 2 INSTANTANÉMENT (elle commence sur la poussière noire)
-  gsap.set('.tech-video', { opacity: 1, visibility: 'visible' });
-  // On lance la vidéo 2
-  video2.play();
+// C'est le SCROLL qui déclenche le passage à la vidéo 2
+ScrollTrigger.create({
+  trigger: '.scene-tech',
+  start: 'top 80%', // Se déclenche quand on scrolle vers la scène 3
+  onEnter: () => {
+    // 1. On force la vidéo 1 à être sur sa dernière image
+    video1.pause();
+    video1.currentTime = video1.duration; 
+    
+    // 2. On échange les vidéos instantanément (invisible car même image)
+    gsap.set('.bg-video', { opacity: 0, visibility: 'hidden' });
+    gsap.set('.tech-video', { opacity: 1, visibility: 'visible' });
+    
+    // 3. On lance la vidéo 2
+    video2.play();
+    
+    // 4. ON EFFACE LE TEXTE FROID
+    gsap.to('.fade-text-cold', { opacity: 0, duration: 0.5 });
+  },
+  onLeaveBack: () => {
+    // Si on remonte, on remet la vidéo 1
+    gsap.set('.bg-video', { opacity: 1, visibility: 'visible' });
+    gsap.set('.tech-video', { opacity: 0, visibility: 'hidden' });
+    gsap.set('.tech-overlay', { opacity: 0 });
+    video2.pause();
+    video2.currentTime = 0;
+    
+    // On réaffiche le texte froid
+    gsap.to('.fade-text-cold', { opacity: 1, duration: 0.5 });
+  }
 });
 
-// 2. Le scroll contrôle l'apparition des lignes SVG (une fois la vidéo 2 lancée)
+/* =========================================
+   ANIMATION DES LIGNES SVG
+   ========================================= */
 const techTl = gsap.timeline({
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top 80%',
+    start: 'top 40%',
     end: 'bottom bottom',
     scrub: 1
   }
