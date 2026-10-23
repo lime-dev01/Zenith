@@ -118,59 +118,17 @@ body {
   text-align: center; line-height: 0.9; opacity: 0; color: white;
 }
 
-/* =========================================
-   FOOTER CLASSIQUE & PROPRE
-   ========================================= */
 .footer {
-  position: relative;
-  z-index: 10;
-  background: #050505; /* Fond noir opaque, pas de transparence */
-  padding: 6rem 10vw 3rem; /* Espacement généreux */
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
+  position: relative; 
+  z-index: 10; 
+  padding: 8rem 10vw 4rem;
+  background: transparent; /* Plus de fond noir */
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Juste une fine ligne */
 }
 
-.footer__content {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.footer h2 {
-  font-family: var(--font-title);
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  letter-spacing: 0.1em;
-  margin: 0;
-}
-
-.footer p {
-  font-size: 1rem;
-  opacity: 0.6;
-  line-height: 1.6;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
+/* On force l'ombre sur tout le texte du footer pour la lisibilité */
+.footer h2,
+.footer p,
 .footer__bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0.4;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 2rem;
-  margin-top: 2rem;
-}
-
-/* Sur mobile, on empile les éléments du bas */
-@media (max-width: 768px) {
-  .footer__bottom {
-    flex-direction: column;
-    gap: 1rem;
-  }
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.8);
 }
