@@ -8,7 +8,7 @@ gsap.ticker.lagSmoothing(0);
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================================
-   SCÈNES 1 & 2 (Vidéo 1)
+   SCÈNES 1 & 2
    ========================================= */
 const video1 = document.getElementById('video-1');
 video1.pause();
@@ -46,6 +46,14 @@ ScrollTrigger.create({
   }
 });
 
+// Le texte froid disparaît plus tôt (quand on quitte la section froide)
+ScrollTrigger.create({
+  trigger: '.section--cold',
+  start: 'bottom 60%',
+  onEnter: () => gsap.to('.fade-text-cold', { opacity: 0, duration: 0.4 }),
+  onLeaveBack: () => gsap.to('.fade-text-cold', { opacity: 1, duration: 0.4 })
+});
+
 /* =========================================
    SCÈNE 3 (Vidéo 2)
    ========================================= */
@@ -61,7 +69,6 @@ ScrollTrigger.create({
     gsap.set('.bg-video', { opacity: 0, visibility: 'hidden' });
     gsap.set('.tech-video', { opacity: 1, visibility: 'visible' });
     video2.play();
-    gsap.to('.fade-text-cold', { opacity: 0, duration: 0.5 });
   },
   onLeaveBack: () => {
     gsap.set('.bg-video', { opacity: 1, visibility: 'visible' });
@@ -69,7 +76,6 @@ ScrollTrigger.create({
     gsap.set('.tech-overlay', { opacity: 0 });
     video2.pause();
     video2.currentTime = 0;
-    gsap.to('.fade-text-cold', { opacity: 1, duration: 0.5 });
   }
 });
 
@@ -94,11 +100,11 @@ gsap.to('.tech-overlay', {
 
 techTl.to('.line--warm', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, 0.5)
       .to('.line--cold', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, "-=0.8")
-      .to('.spec', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }, "-=0.5")
+      .to('.spec-card', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }, "-=0.5")
       .to('.tech-title', { opacity: 1, duration: 1 }, "-=0.5");
 
 /* =========================================
-   SCÈNE 4 : L'ACTION (HUD & Switch)
+   SCÈNE 4 : L'ACTION (HUD)
    ========================================= */
 const videoSki = document.getElementById('video-ski');
 const videoSand = document.getElementById('video-sand');
@@ -109,31 +115,31 @@ const tempText = document.getElementById('temp-text');
 const altText = document.getElementById('alt-text');
 const uvText = document.getElementById('uv-text');
 
+// Les barres de données
+const fillTemp = document.getElementById('fill-temp');
+const fillAlt = document.getElementById('fill-alt');
+
 videoSki.pause();
 videoSand.pause();
 
-let isColdMode = true; // On commence en mode froid (ski)
+let isColdMode = true; 
 
-// On entre dans la Scène 4
 ScrollTrigger.create({
   trigger: '.scene-action',
   start: 'top 80%',
   onEnter: () => {
-    // On cache le studio
     gsap.set('.tech-video', { opacity: 0, visibility: 'hidden' });
     gsap.set('.tech-overlay', { opacity: 0 });
     video2.pause();
 
-    // On affiche la vidéo de ski et le HUD
     gsap.set('.action-video', { opacity: 0 });
     gsap.set('#video-ski', { opacity: 1 });
     videoSki.play();
     
     gsap.to('.hud-container', { opacity: 1, duration: 0.5 });
-    gsap.to('.hud-container', { color: 'var(--cold)', duration: 0.5 }); // Force le bleu
+    gsap.to('.hud-container', { color: 'var(--cold)', duration: 0.5 });
   },
   onLeaveBack: () => {
-    // Reset si on remonte
     videoSki.pause();
     videoSki.currentTime = 0;
     videoSand.pause();
@@ -147,32 +153,31 @@ ScrollTrigger.create({
   }
 });
 
-// Fonction pour le Switch
 function switchMode() {
   // 1. Glitch effect
   gsap.to('.hud-container', { x: 10, y: -10, duration: 0.05, repeat: 5, yoyo: true, onComplete: () => {
     gsap.set('.hud-container', { x: 0, y: 0 });
   }});
 
-  // 2. Switch les vidéos et les couleurs
+  // 2. Switch
   if (isColdMode) {
-    // Passage en mode CHAUD (Sable)
     gsap.set('#video-ski', { visibility: 'hidden' });
     gsap.set('#video-sand', { visibility: 'visible', opacity: 1 });
     videoSand.play();
     
-    // On change la couleur du HUD
     gsap.to('.hud-container', { color: 'var(--warm)', duration: 0.3 });
     
-    // On change les textes
     modeText.textContent = "DÉSERT";
     tempText.textContent = "48°C";
     altText.textContent = "120M";
     uvText.textContent = "MAX";
     
+    // Animation des barres
+    gsap.to(fillTemp, { width: '90%', duration: 0.5 });
+    gsap.to(fillAlt, { width: '20%', duration: 0.5 });
+    
     isColdMode = false;
   } else {
-    // Retour en mode FROID (Ski)
     gsap.set('#video-sand', { visibility: 'hidden' });
     gsap.set('#video-ski', { visibility: 'visible', opacity: 1 });
     videoSki.play();
@@ -183,6 +188,10 @@ function switchMode() {
     tempText.textContent = "-24°C";
     altText.textContent = "3200M";
     uvText.textContent = "0%";
+    
+    // Animation des barres
+    gsap.to(fillTemp, { width: '20%', duration: 0.5 });
+    gsap.to(fillAlt, { width: '80%', duration: 0.5 });
     
     isColdMode = true;
   }
