@@ -31,83 +31,61 @@ ScrollTrigger.create({
     }, 2000);
   },
   onLeaveBack: () => {
+    // Reset complet si on remonte
     video1.pause();
     video1.currentTime = 0;
     gsap.to('.fade-text-warm', { opacity: 1, y: 0, duration: 0.5 });
     gsap.to('.fade-text-cold', { opacity: 0, duration: 0.3 });
     gsap.set('.fade-text-cold .title span', { y: 100 });
     gsap.set('.fade-text-cold .desc', { opacity: 0, y: 20 });
+    
+    // On remet la vidéo 1 et on cache la vidéo 2
+    gsap.set('.bg-video', { opacity: 1, visibility: 'visible' });
+    gsap.set('.tech-video', { opacity: 0, visibility: 'hidden' });
+    gsap.set('.tech-overlay', { opacity: 0 });
+    video2.pause();
+    video2.currentTime = 0;
   }
 });
 
 /* =========================================
-   SCÈNE 3 : LE FONDU SANS BUG
+   SCÈNE 3 : LE SWITCH INSTANTANÉ
    ========================================= */
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// On lance la vidéo 2 quand la section approche
-ScrollTrigger.create({
-  trigger: '.scene-tech',
-  start: 'top bottom',
-  onEnter: () => video2.play(),
-  onLeaveBack: () => { video2.pause(); video2.currentTime = 0; }
+// 1. LE MOMENT CLÉ : Quand la vidéo 1 se termine
+video1.addEventListener('ended', () => {
+  // On cache la vidéo 1 INSTANTANÉMENT
+  gsap.set('.bg-video', { opacity: 0, visibility: 'hidden' });
+  // On montre la vidéo 2 INSTANTANÉMENT (elle commence sur la poussière noire)
+  gsap.set('.tech-video', { opacity: 1, visibility: 'visible' });
+  // On lance la vidéo 2
+  video2.play();
 });
 
-// On allume la vidéo 2 TRÈS VITE dès qu'on approche
-gsap.to('.tech-video', {
-  opacity: 1,
-  scrollTrigger: {
-    trigger: '.scene-tech',
-    start: 'top 80%', // Commence plus tôt
-    end: 'top 40%',   // Finit plus vite (la vidéo 2 est bien opaque avant que tu ne voies les lignes)
-    scrub: 1
-  }
-});
-
-// On éteint la vidéo 1 EN MÊME TEMPS (Crossfade)
-gsap.to('.bg-video', {
-  opacity: 0,
+// 2. Le scroll contrôle l'apparition des lignes SVG (une fois la vidéo 2 lancée)
+const techTl = gsap.timeline({
   scrollTrigger: {
     trigger: '.scene-tech',
     start: 'top 80%',
-    end: 'top 40%',
+    end: 'bottom bottom',
     scrub: 1
   }
 });
 
+// On affiche l'overlay (lignes + textes)
 gsap.to('.tech-overlay', {
   opacity: 1,
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top 80%',
-    end: 'top 40%',
+    start: 'top 60%',
+    end: 'top 20%',
     scrub: 1
   }
 });
 
-// Le texte froid s'efface
-gsap.to('.fade-text-cold', {
-  opacity: 0,
-  scrollTrigger: {
-    trigger: '.scene-tech',
-    start: 'top 80%',
-    end: 'top 40%',
-    scrub: 1
-  }
-});
-
-// Les lignes SVG se dessinent SEULEMENT quand la vidéo 2 est bien visible (top 40%)
-const techTl = gsap.timeline({
-  scrollTrigger: {
-    trigger: '.scene-tech',
-    start: 'top 40%', 
-    end: 'bottom bottom', 
-    scrub: 1
-  }
-});
-
-techTl.to('.line--warm', { strokeDashoffset: 0, duration: 1, stagger: 0.2 })
+techTl.to('.line--warm', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, 0.5)
       .to('.line--cold', { strokeDashoffset: 0, duration: 1, stagger: 0.2 }, "-=0.8")
       .to('.spec', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }, "-=0.5")
       .to('.tech-title', { opacity: 1, duration: 1 }, "-=0.5");
