@@ -46,25 +46,32 @@ ScrollTrigger.create({
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// 2. L'opacité est STRICTEMENT liée au scroll (aucun onEnter/onLeaveBack ici)
-// Le fondu commence quand la section est en bas de l'écran, et finit quand elle est à 20% du haut.
+// On lance la vidéo 2 quand la section approche
+ScrollTrigger.create({
+  trigger: '.scene-tech',
+  start: 'top bottom',
+  onEnter: () => video2.play(),
+  onLeaveBack: () => { video2.pause(); video2.currentTime = 0; }
+});
+
+// On allume la vidéo 2 TRÈS VITE dès qu'on approche
 gsap.to('.tech-video', {
   opacity: 1,
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top bottom',
-    end: 'top 20%',
+    start: 'top 80%', // Commence plus tôt
+    end: 'top 40%',   // Finit plus vite (la vidéo 2 est bien opaque avant que tu ne voies les lignes)
     scrub: 1
   }
 });
 
-// 2.5 ON ÉTEINT LA VIDÉO 1 (C'est ça qui règle le problème d'opacité)
+// On éteint la vidéo 1 EN MÊME TEMPS (Crossfade)
 gsap.to('.bg-video', {
   opacity: 0,
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top bottom',
-    end: 'top 20%',
+    start: 'top 80%',
+    end: 'top 40%',
     scrub: 1
   }
 });
@@ -73,28 +80,28 @@ gsap.to('.tech-overlay', {
   opacity: 1,
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top bottom',
-    end: 'top 20%',
-    scrub: 1
-  }
-});
-
-// 3. Le texte froid s'efface
-gsap.to('.fade-text-cold', {
-  opacity: 0,
-  scrollTrigger: {
-    trigger: '.scene-tech',
-    start: 'top bottom',
+    start: 'top 80%',
     end: 'top 40%',
     scrub: 1
   }
 });
 
-// 4. Les lignes SVG se dessinent SEULEMENT quand la vidéo 2 est bien visible (top 20%)
+// Le texte froid s'efface
+gsap.to('.fade-text-cold', {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: '.scene-tech',
+    start: 'top 80%',
+    end: 'top 40%',
+    scrub: 1
+  }
+});
+
+// Les lignes SVG se dessinent SEULEMENT quand la vidéo 2 est bien visible (top 40%)
 const techTl = gsap.timeline({
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top 20%', // Déclenche quand le fondu est terminé
+    start: 'top 40%', 
     end: 'bottom bottom', 
     scrub: 1
   }
