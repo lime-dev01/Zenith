@@ -46,10 +46,10 @@ ScrollTrigger.create({
   }
 });
 
-// CORRECTION 1 : Le texte froid disparaît beaucoup plus tôt (bottom 90%)
+// CORRECTION 1 : Le texte froid s'efface DÈS le premier scroll (top 10%)
 ScrollTrigger.create({
   trigger: '.section--cold',
-  start: 'bottom 90%', 
+  start: 'top 10%', 
   onEnter: () => gsap.to('.fade-text-cold', { opacity: 0, duration: 0.4 }),
   onLeaveBack: () => gsap.to('.fade-text-cold', { opacity: 1, duration: 0.4 })
 });
@@ -60,10 +60,10 @@ ScrollTrigger.create({
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// CORRECTION 2 : On déclenche la vidéo 2 sur la section froide, bien plus tôt
+// CORRECTION 2 : La vidéo 2 se déclenche seulement 30% plus bas (au lieu d'attendre la fin)
 ScrollTrigger.create({
   trigger: '.section--cold',
-  start: 'bottom 80%', // Se déclenche quand la section froide est presque terminée
+  start: 'top 30%', 
   onEnter: () => {
     video1.pause();
     video1.currentTime = video1.duration; 
