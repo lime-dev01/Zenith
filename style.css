@@ -16,7 +16,7 @@ body {
 }
 
 /* =========================================
-   LES VIDÉOS (Superposées et Fixes)
+   LES VIDÉOS
    ========================================= */
 .bg-video, .tech-video {
   position: fixed; top: 0; left: 0;
@@ -26,14 +26,15 @@ body {
 }
 
 .bg-video { z-index: 1; }
-.tech-video { z-index: 2; opacity: 0; }
 
 .overlay {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
   background: rgba(0, 0, 0, 0.25);
-  z-index: 3; pointer-events: none;
+  z-index: 2; pointer-events: none;
 }
+
+.tech-video { z-index: 3; opacity: 0; }
 
 .tech-overlay {
   position: fixed; top: 0; left: 0;
@@ -48,28 +49,58 @@ body {
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
   padding: 2rem 4rem;
-  display: flex; justify-content: space-between;
+  display: flex; justify-content: space-between; align-items: center;
   z-index: 100; mix-blend-mode: difference;
 }
+
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
-.nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-left: 2rem; }
+
+/* =========================================
+   BOUTONS NAVIGATION (Le redesign)
+   ========================================= */
+.nav__links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav__links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+/* L'effet de ligne qui se dessine au survol */
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--cold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.nav__links a:hover { color: var(--cold); }
+.nav__links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 
 /* =========================================
    SECTIONS DE SCROLL
    ========================================= */
-.section {
-  height: 100vh;
-  position: relative;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.scene-tech {
-  height: 150vh;
-  position: relative;
-  z-index: 5;
-  pointer-events: none;
-}
+.section { height: 100vh; position: relative; z-index: 5; pointer-events: none; }
+.scene-tech { height: 150vh; position: relative; z-index: 5; pointer-events: none; }
 
 .text-container {
   position: fixed; top: 50%; left: 10vw;
@@ -89,12 +120,7 @@ body {
    ÉLÉMENTS TECHNIQUES
    ========================================= */
 .blueprint { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.line { 
-  fill: none; 
-  stroke-width: 0.2; 
-  stroke-dasharray: 100; 
-  stroke-dashoffset: 100; 
-}
+.line { fill: none; stroke-width: 0.2; stroke-dasharray: 100; stroke-dashoffset: 100; }
 .line--warm { stroke: var(--warm); filter: drop-shadow(0 0 6px var(--warm)); }
 .line--cold { stroke: var(--cold); filter: drop-shadow(0 0 6px var(--cold)); }
 
@@ -113,29 +139,31 @@ body {
 }
 
 /* =========================================
-   FOOTER (Verre dépoli)
+   FOOTER (100% Transparent + Flou)
    ========================================= */
 .footer {
   position: relative; 
   z-index: 10; 
   padding: 8rem 10vw 4rem;
   
-  /* Fond teinté + flou */
-  background: rgba(5, 5, 5, 0.4); 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  /* Très légèrement teinté pour que le flou fonctionne, mais quasi transparent */
+  background: rgba(5, 5, 5, 0.15); 
   
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  /* Le flou qui donne l'effet "verre dépoli" */
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Ombre sur le texte pour la lisibilité */
+/* Ombre très forte sur le texte pour qu'il soit lisible sur la vidéo */
 .footer h2,
 .footer p,
 .footer__bottom {
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 1), 0 0 15px rgba(0, 0, 0, 0.9);
 }
 
 .footer__content { max-width: 800px; margin: 0 auto; text-align: center; }
 .footer h2 { font-family: var(--font-title); font-size: 4rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
-.footer p { opacity: 0.8; margin-bottom: 4rem; }
-.footer__bottom { display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
+.footer p { opacity: 0.9; margin-bottom: 4rem; }
+.footer__bottom { display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.7; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 2rem; }
