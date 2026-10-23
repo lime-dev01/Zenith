@@ -25,13 +25,9 @@ body {
   pointer-events: none;
 }
 
-/* Vidéo 1 en dessous */
 .bg-video { z-index: 1; }
-
-/* Vidéo 2 au-dessus, invisible au départ */
 .tech-video { z-index: 2; opacity: 0; }
 
-/* Overlay sombre de la vidéo 1 */
 .overlay {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
@@ -39,12 +35,11 @@ body {
   z-index: 3; pointer-events: none;
 }
 
-/* Overlay technique (Lignes et textes) au-dessus de tout */
 .tech-overlay {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: 4; pointer-events: none;
-  opacity: 0; /* Invisible au départ */
+  opacity: 0;
 }
 
 /* =========================================
@@ -57,21 +52,20 @@ body {
   z-index: 100; mix-blend-mode: difference;
 }
 .nav__logo { font-family: var(--font-title); font-size: 1.4rem; letter-spacing: 0.1em; }
-.nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-left: 2rem; transition: opacity 0.3s; }
+.nav__links a { color: white; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-left: 2rem; }
 
 /* =========================================
-   SECTIONS DE SCROLL (Réduites)
+   SECTIONS DE SCROLL
    ========================================= */
 .section {
-  height: 100vh; /* Réduit drastiquement pour scroller plus vite */
+  height: 100vh;
   position: relative;
   z-index: 5;
   pointer-events: none;
 }
 
-/* La section Tech */
 .scene-tech {
-  height: 150vh; /* Réduit pour que les lignes apparaissent vite */
+  height: 150vh;
   position: relative;
   z-index: 5;
   pointer-events: none;
@@ -92,7 +86,7 @@ body {
 .desc { font-size: 1.1rem; line-height: 1.6; opacity: 0.9; font-weight: 300; }
 
 /* =========================================
-   ÉLÉMENTS TECHNIQUES (Lignes et Specs)
+   ÉLÉMENTS TECHNIQUES
    ========================================= */
 .blueprint { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .line { 
@@ -118,17 +112,30 @@ body {
   text-align: center; line-height: 0.9; opacity: 0; color: white;
 }
 
+/* =========================================
+   FOOTER (Verre dépoli)
+   ========================================= */
 .footer {
   position: relative; 
   z-index: 10; 
   padding: 8rem 10vw 4rem;
-  background: transparent; /* Plus de fond noir */
-  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Juste une fine ligne */
+  
+  /* Fond teinté + flou */
+  background: rgba(5, 5, 5, 0.4); 
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* On force l'ombre sur tout le texte du footer pour la lisibilité */
+/* Ombre sur le texte pour la lisibilité */
 .footer h2,
 .footer p,
 .footer__bottom {
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.8);
 }
+
+.footer__content { max-width: 800px; margin: 0 auto; text-align: center; }
+.footer h2 { font-family: var(--font-title); font-size: 4rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+.footer p { opacity: 0.8; margin-bottom: 4rem; }
+.footer__bottom { display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
