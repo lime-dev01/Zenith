@@ -186,7 +186,7 @@ body {
 /* =========================================
    SECTIONS DE SCROLL (Hauteurs Réduites)
    ========================================= */
-.section { height: 100vh; position: relative; z-index: 5; pointer-events: none; }
+.section { height: 80vh; position: relative; z-index: 5; pointer-events: none; }
 /* Réduit de 150vh à 100vh */
 .scene-tech { height: 100vh; position: relative; z-index: 5; pointer-events: none; }
 /* Réduit de 200vh à 100vh */
