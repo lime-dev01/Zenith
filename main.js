@@ -46,10 +46,10 @@ ScrollTrigger.create({
   }
 });
 
-// Texte froid qui disparaît dès qu'on quitte la section (start plus tôt)
+// CORRECTION 1 : Le texte froid disparaît beaucoup plus tôt (bottom 90%)
 ScrollTrigger.create({
   trigger: '.section--cold',
-  start: 'bottom 70%', 
+  start: 'bottom 90%', 
   onEnter: () => gsap.to('.fade-text-cold', { opacity: 0, duration: 0.4 }),
   onLeaveBack: () => gsap.to('.fade-text-cold', { opacity: 1, duration: 0.4 })
 });
@@ -60,9 +60,10 @@ ScrollTrigger.create({
 const video2 = document.getElementById('video-2');
 video2.pause();
 
+// CORRECTION 2 : On déclenche la vidéo 2 sur la section froide, bien plus tôt
 ScrollTrigger.create({
-  trigger: '.scene-tech',
-  start: 'top 80%',
+  trigger: '.section--cold',
+  start: 'bottom 80%', // Se déclenche quand la section froide est presque terminée
   onEnter: () => {
     video1.pause();
     video1.currentTime = video1.duration; 
@@ -84,10 +85,11 @@ ScrollTrigger.create({
   }
 });
 
+// Le reste de l'animation de la Scène 3 (lignes SVG)
 const techTl = gsap.timeline({
   scrollTrigger: {
     trigger: '.scene-tech',
-    start: 'top 50%', // Déclenchement plus tôt
+    start: 'top 50%',
     end: 'bottom bottom',
     scrub: 1
   }
@@ -167,7 +169,6 @@ function switchMode() {
     gsap.set('#video-sand', { visibility: 'visible', opacity: 1 });
     videoSand.play();
     
-    // Animations couleurs en dur (Hex) pour éviter le bug du bleu
     gsap.to('.hud-container', { color: '#ff5500', duration: 0.3 });
     gsap.to('.corner', { borderColor: '#ff5500', duration: 0.3 });
     gsap.to('.center-dot', { backgroundColor: '#ff5500', duration: 0.3 });
@@ -188,7 +189,6 @@ function switchMode() {
     gsap.set('#video-ski', { visibility: 'visible', opacity: 1 });
     videoSki.play();
     
-    // Animations couleurs en dur (Hex)
     gsap.to('.hud-container', { color: '#00e5ff', duration: 0.3 });
     gsap.to('.corner', { borderColor: '#00e5ff', duration: 0.3 });
     gsap.to('.center-dot', { backgroundColor: '#00e5ff', duration: 0.3 });
