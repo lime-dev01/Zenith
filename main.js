@@ -46,18 +46,21 @@ ScrollTrigger.create({
 const video2 = document.getElementById('video-2');
 video2.pause();
 
-// 1. On lance la vidéo 2 quand la section approche
-ScrollTrigger.create({
-  trigger: '.scene-tech',
-  start: 'top bottom',
-  onEnter: () => video2.play(),
-  onLeaveBack: () => { video2.pause(); video2.currentTime = 0; }
-});
-
 // 2. L'opacité est STRICTEMENT liée au scroll (aucun onEnter/onLeaveBack ici)
 // Le fondu commence quand la section est en bas de l'écran, et finit quand elle est à 20% du haut.
 gsap.to('.tech-video', {
   opacity: 1,
+  scrollTrigger: {
+    trigger: '.scene-tech',
+    start: 'top bottom',
+    end: 'top 20%',
+    scrub: 1
+  }
+});
+
+// 2.5 ON ÉTEINT LA VIDÉO 1 (C'est ça qui règle le problème d'opacité)
+gsap.to('.bg-video', {
+  opacity: 0,
   scrollTrigger: {
     trigger: '.scene-tech',
     start: 'top bottom',
